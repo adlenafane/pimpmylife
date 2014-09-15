@@ -46,7 +46,7 @@ angular.module('infographics').controller('ListController', ['$scope', '$http',
             .success(function(data) {
               $scope.infographics = data;
             });
-        })
+        });
     };
 
     $http.get('/api/infographics')
