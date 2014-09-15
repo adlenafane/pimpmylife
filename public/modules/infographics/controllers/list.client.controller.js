@@ -11,20 +11,25 @@ angular.module('infographics').controller('ListController', ['$scope', '$http',
 
     $scope.saveInfographics = function() {
       if ($scope.editIndex) {
-        $scope.editInfographics = JSON.parse($scope.editInfographics);
-        $scope.infographics[$scope.editIndex] = $scope.editInfographics;
-
-        $scope.displayEditForm = !$scope.displayEditForm;
-        $scope.editInfographics = null;
-        $scope.editIndex = null;
-        $scope.displayEditForm = false;
+        var infographics = JSON.parse($scope.editInfographics);
+        $http.put('/api/infographics/' + infographics._id, infographics)
+          .success(function() {
+            $http.get('/api/infographics')
+              .success(function(data) {
+                $scope.infographics = data;
+                $scope.editInfographics = null;
+                $scope.displayEditForm = false;
+              });
+          });
       }
 
       else {
-        $scope.newInfographics = JSON.parse($scope.newInfographics);
-        $scope.infographics.push($scope.newInfographics);
-        $scope.newInfographics = null;
-        $scope.displayAddForm = false;
+        $http.post('/api/infographics', JSON.parse($scope.newInfographics))
+          .success(function(data) {
+            $scope.infographics.push(data);
+            $scope.newInfographics = null;
+            $scope.displayAddForm = false;
+          });
       }
     };
 
@@ -34,23 +39,19 @@ angular.module('infographics').controller('ListController', ['$scope', '$http',
       $scope.editInfographics = JSON.stringify($scope.infographics[index]);
     };
 
-    $scope.removeInfographics = function(index) {
-      $scope.infographics.splice(index, 1);
+    $scope.removeInfographics = function(infographics) {
+      $http.delete('/api/infographics/' + infographics._id)
+        .success(function() {
+          $http.get('/api/infographics')
+            .success(function(data) {
+              $scope.infographics = data;
+            });
+        })
     };
 
-    $scope.infographics = [
-      {
-        name: "Info 1",
-        details: "complex details"
-      },
-      {
-        name: "Info 2",
-        details: "complex details"
-      },
-      {
-        name: "Info 3",
-        details: "complex details"
-      }
-    ];
+    $http.get('/api/infographics')
+      .success(function(data) {
+        $scope.infographics = data;
+      });
   }
 ]);

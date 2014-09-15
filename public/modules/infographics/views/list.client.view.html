@@ -2,13 +2,13 @@
     <h3 class="col-md-12 text-center">Your infographics</h3>
 
     <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8" data-ng-repeat="infograph in infographics track by $index">
-        <p class="col-xs-10">{{ infograph }}</p>
-        <span class="glyphicon glyphicon-trash col-xs-1" data-ng-click="removeInfographics($index)"></span>
+        <a data-ng-href="#!/infographics/{{ infograph._id }}"><p class="col-xs-10">{{ infograph }}</p></a>
+        <span class="glyphicon glyphicon-trash col-xs-1" data-ng-click="removeInfographics(infograph)"></span>
         <span class="glyphicon glyphicon-pencil col-xs-1" data-ng-click="toggleEditForm($index)"></span>
     </div>
 
     <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8">
-        <button type="button" class="btn btn-primary btn-block" data-ng-click="toggleAddForm();">Add infographics</button>
+        <button type="button" class="btn btn-primary btn-block" data-ng-click="toggleAddForm();"><span class="glyphicon glyphicon-plus"></span></button>
     </div>
 
 
@@ -23,7 +23,7 @@
                 <textarea class="form-control" id="new-infographics" placeholder="Enter the infographics details" data-ng-model="newInfographics"></textarea>
             </div>
             <span class="help-block">Enter a json form for the infographics like: { "name": "Info 3", "details": "complex details" }</span>
-            <button type="submit" class="btn btn-default btn-block">Add</button>
+            <button type="submit" class="btn btn-default btn-block">Save</button>
         </form>
     </div>
 
@@ -38,7 +38,7 @@
                 <label for="edit-infographics">Infographics</label>
                 <textarea class="form-control" id="edit-infographics" placeholder="Edit the infographics details" data-ng-model="editInfographics"></textarea>
             </div>
-            <button type="submit" class="btn btn-default btn-block">Edit</button>
+            <button type="submit" class="btn btn-default btn-block">Save</button>
         </form>
     </div>
 </section>
