@@ -5,19 +5,21 @@
  */
 
 module.exports = function(app) {
+  var users = require('../../app/controllers/users');
+
 	// Infographics Routes
 	var infographics = require('../../app/controllers/infographics');
 
 	// Create
-  app.route('/api/infographics').post(infographics.create);
+  app.route('/api/infographics').post(users.requiresLogin, infographics.create);
 
   // Read
-  app.route('/api/infographics').get(infographics.getList);
-	app.route('/api/infographics/:infoid').get(infographics.get);
+  app.route('/api/infographics').get(users.requiresLogin, infographics.getList);
+	app.route('/api/infographics/:infoId').get(users.requiresLogin, infographics.assertIsMine, infographics.get);
 
   // Update
-	app.route('/api/infographics/:infoid').put(infographics.update);
+	app.route('/api/infographics/:infoId').put(users.requiresLogin, infographics.assertIsMine, infographics.update);
 
   // Delete
-	app.route('/api/infographics/:infoid').delete(infographics.remove);
+	app.route('/api/infographics/:infoId').delete(users.requiresLogin, infographics.assertIsMine, infographics.remove);
 };

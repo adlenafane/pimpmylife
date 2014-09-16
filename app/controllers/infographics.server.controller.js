@@ -4,6 +4,7 @@
  * Module dependencies.
  */
 var _ = require('lodash'),
+    users = require('./users'),
     errorHandler = require('./errors'),
     mongoose = require('mongoose'),
     Infographics = mongoose.model('Infographics');
@@ -14,6 +15,7 @@ exports.create = function (req, res, next) {
 
   // Add missing user fields
   infographics.lastModification = Date.now();
+  infographics.userId = req.user._id;
 
   // Then save the user
   infographics.save(function(err, infographics) {
@@ -27,7 +29,7 @@ exports.create = function (req, res, next) {
 };
 
 exports.getList = function (req, res, next) {
-  Infographics.find({}, function(err, infographics) {
+  Infographics.find({ userId: req.user._id }, function(err, infographics) {
     if (err) {
       return res.status(500).send({
         message: errorHandler.getErrorMessage(err)
@@ -38,7 +40,7 @@ exports.getList = function (req, res, next) {
 };
 
 exports.get = function (req, res, next) {
-  Infographics.findOne({ _id: req.params.infoid }, function(err, infographics) {
+  Infographics.findOne({ _id: req.params.infoId }, function(err, infographics) {
     if (err) {
       return res.status(500).send({
         message: errorHandler.getErrorMessage(err)
@@ -49,7 +51,7 @@ exports.get = function (req, res, next) {
 };
 
 exports.update = function (req, res, next) {
-  Infographics.findByIdAndUpdate(req.params.infoid, req.body, function (err, infographics) {
+  Infographics.findByIdAndUpdate(req.params.infoId, req.body, function (err, infographics) {
       if (err) {
         return res.status(500).send({
           message: errorHandler.getErrorMessage(err)
@@ -61,12 +63,29 @@ exports.update = function (req, res, next) {
 };
 
 exports.remove = function (req, res, next) {
-  Infographics.findByIdAndRemove(req.params.infoid, function(err) {
+  Infographics.findByIdAndRemove(req.params.infoId, function(err) {
     if (err) {
       return res.status(500).send({
         message: errorHandler.getErrorMessage(err)
       });
     }
     res.status(204).send();
+  });
+};
+
+exports.assertIsMine = function (req, res, next) {
+  Infographics.findOne({ _id: req.params.infoId}, function (err, infographics) {
+    if (err) {
+      return res.status(500).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    }
+    // Added +'' to ensure string comparison
+    if (infographics.userId !== req.user._id+'') {
+      return res.status(403).send({
+        message: 'User is not authorized'
+      });
+    }
+    next()
   });
 };

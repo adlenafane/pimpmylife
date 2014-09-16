@@ -22,7 +22,14 @@ var InfographicsSchema = new Schema({
 		trim: true,
 		default: '',
 		validate: [validateLocalStrategyProperty, 'Please fill in a name']
-	}
+	},
+  lastModification: {
+    type: Date,
+    default: Date.now
+  },
+  userId: {
+    type: String
+  }
 });
 
 mongoose.model('Infographics', InfographicsSchema);
