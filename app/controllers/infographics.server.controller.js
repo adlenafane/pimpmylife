@@ -51,7 +51,12 @@ exports.get = function (req, res, next) {
 };
 
 exports.update = function (req, res, next) {
-  Infographics.findByIdAndUpdate(req.params.infoId, req.body, function (err, infographics) {
+  var infographics = new Infographics(req.body);
+  // Add missing user fields
+  infographics.lastModification = Date.now();
+  infographics.userId = req.user._id;
+
+  Infographics.findByIdAndUpdate(req.params.infoId, infographics, function (err, infographics) {
       if (err) {
         return res.status(500).send({
           message: errorHandler.getErrorMessage(err)
@@ -86,6 +91,6 @@ exports.assertIsMine = function (req, res, next) {
         message: 'User is not authorized'
       });
     }
-    next()
+    next();
   });
 };
