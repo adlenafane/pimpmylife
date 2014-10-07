@@ -9,4 +9,27 @@
     <div class="col-md-12">
         <pre>{{ infographics | json }}</pre>
     </div>
+
+    <div bar-chart="bar-chart" data-data='d3Data' data-bar-height="20" data-bar-padding="5"></div>
+
+    <pre>{{ treeData | json }}</pre>
+    <div>
+        <input ng-model="treeData.name">
+    </div>
+    <div>
+        <input ng-model="treeData.parents.0.name">
+    </div>
+    <div>
+        <input ng-model="treeData.parents.0.parents.0.name">
+        <i class="glyphicon glyphicon-trash" ng-click="deleteNode('parents.0.parents', 0)"></i>
+    </div>
+    <div>
+        <input ng-model="treeData.parents.0.parents.1.name">
+        <i class="glyphicon glyphicon-trash" ng-click="deleteNode('parents.0.parents', 1)"></i>
+    </div>
+    <div>
+        <input ng-model="treeData.parents.1.name">
+    </div>
+
+    <div tree-chart="tree-chart" data-data='d3TreeData' data-data-updated='dataUpdated'></div>
 </section>

@@ -4,6 +4,7 @@ var ApplicationConfiguration = function () {
     // Init module configuration options
     var applicationModuleName = 'perso-viz';
     var applicationModuleVendorDependencies = [
+        'd3',
         'ngResource',
         'ngCookies',
         'ngAnimate',
@@ -45,6 +46,8 @@ angular.element(document).ready(function () {
 });'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');'use strict';
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('d3');'use strict';
 ApplicationConfiguration.registerModule('infographics');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');'use strict';
@@ -224,6 +227,40 @@ angular.module('core').service('Menus', [function () {
     //Adding the topbar menu
     this.addMenu('topbar');
   }]);'use strict';
+angular.module('d3', []).factory('d3Service', [
+  '$document',
+  '$q',
+  '$rootScope',
+  '$window',
+  function ($document, $q, $rootScope, $window) {
+    var d = $q.defer();
+    function onScriptLoad() {
+      // Load client in the browser
+      $rootScope.$apply(function () {
+        d.resolve($window.d3);
+      });
+    }
+    // Create a script tag with d3 as the source
+    // and call our onScriptLoad callback when it
+    // has been loaded
+    var scriptTag = $document[0].createElement('script');
+    scriptTag.type = 'text/javascript';
+    scriptTag.async = true;
+    scriptTag.src = 'http://d3js.org/d3.v3.min.js';
+    scriptTag.onreadystatechange = function () {
+      if (this.readyState === 'complete')
+        onScriptLoad();
+    };
+    scriptTag.onload = onScriptLoad;
+    var s = $document[0].getElementsByTagName('body')[0];
+    s.appendChild(scriptTag);
+    return {
+      d3: function () {
+        return d.promise;
+      }
+    };
+  }
+]);'use strict';
 angular.module('infographics').config([
   '$stateProvider',
   function ($stateProvider) {
@@ -244,6 +281,55 @@ angular.module('infographics').controller('InfographicsController', [
     $http.get('/api/infographics/' + $stateParams.id).success(function (data) {
       $scope.infographics = data;
     });
+    $scope.d3Data = [
+      {
+        name: 'Greg',
+        score: 98
+      },
+      {
+        name: 'Ari',
+        score: 96
+      },
+      {
+        name: 'Q',
+        score: 75
+      },
+      {
+        name: 'Loser',
+        score: 48
+      }
+    ];
+    $scope.dataUpdated = true;
+    $scope.treeData = {
+      name: 'Clifford Shanks',
+      parents: [
+        {
+          name: 'James Shanks',
+          parents: [
+            { name: 'Robert Shanks' },
+            { name: 'Elizabeth Shanks' }
+          ]
+        },
+        {
+          name: 'Ann Emily Brown',
+          parents: [
+            { name: 'Henry Brown' },
+            { name: 'Sarah Houchins' }
+          ]
+        }
+      ]
+    };
+    $scope.d3TreeData = JSON.parse(JSON.stringify($scope.treeData));
+    $scope.$watch('treeData', function () {
+      $scope.dataUpdated = true;
+      $scope.d3TreeData = JSON.parse(JSON.stringify($scope.treeData));
+    }, true);
+    $scope.deleteNode = function (path, position) {
+      function index(obj, i) {
+        return obj[i];
+      }
+      path.split('.').reduce(index, $scope.treeData).splice(position, 1);
+    };
   }
 ]);'use strict';
 angular.module('infographics').controller('ListController', [
@@ -288,6 +374,115 @@ angular.module('infographics').controller('ListController', [
     $http.get('/api/infographics').success(function (data) {
       $scope.infographics = data;
     });
+  }
+]);'use strict';
+angular.module('infographics').directive('barChart', [
+  'd3Service',
+  '$window',
+  function (d3Service, $window) {
+    return {
+      restrict: 'EA',
+      scope: { data: '=' },
+      link: function (scope, element, attrs) {
+        d3Service.d3().then(function (d3) {
+          var margin = parseInt(attrs.margin) || 20, barHeight = parseInt(attrs.barHeight) || 20, barPadding = parseInt(attrs.barPadding) || 5;
+          var svg = d3.select(element[0]).append('svg').style('width', '100%');
+          // Browser onresize event
+          $window.onresize = function () {
+            scope.$apply();
+          };
+          // Watch for resize event
+          scope.$watch(function () {
+            return angular.element($window)[0].innerWidth;
+          }, function () {
+            scope.render(scope.data);
+          });
+          scope.$watch('data', function (newVals) {
+            return scope.render(newVals);
+          }, true);
+          scope.render = function (data) {
+            svg.selectAll('*').remove();
+            var width = d3.select(element[0]).node().offsetWidth - margin, height = data.length * (barHeight + barPadding), color = d3.scale.category20(), xScale = d3.scale.linear().domain([
+                0,
+                d3.max(data, function (d) {
+                  return d.score;
+                })
+              ]).range([
+                0,
+                width
+              ]);
+            svg.attr('height', height);
+            svg.selectAll('rect').data(data).enter().append('rect').attr('height', barHeight).attr('width', 140).attr('x', Math.round(margin / 2)).attr('y', function (d, i) {
+              return i * (barHeight + barPadding);
+            }).attr('fill', function (d) {
+              return color(d.score);
+            }).transition().duration(1000).attr('width', function (d) {
+              return xScale(d.score);
+            });
+          };
+        });
+      }
+    };
+  }
+]);'use strict';
+angular.module('infographics').directive('treeChart', [
+  'd3Service',
+  '$window',
+  function (d3Service, $window) {
+    return {
+      restrict: 'EA',
+      scope: {
+        data: '=',
+        dataUpdated: '='
+      },
+      link: function (scope, element, attrs) {
+        d3Service.d3().then(function (d3) {
+          var margin = parseInt(attrs.margin) || 200;
+          function elbow(d, i) {
+            return 'M' + d.source.y + ',' + d.source.x + 'H' + d.target.y + 'V' + d.target.x + (d.target.children ? '' : 'h' + margin);
+          }
+          var svg = d3.select(element[0]).append('svg').style('width', '100%');
+          // Browser onresize event
+          $window.onresize = function () {
+            scope.$apply();
+          };
+          // Watch for resize event
+          scope.$watch(function () {
+            return angular.element($window)[0].innerWidth;
+          }, function () {
+            scope.render(scope.data);
+          });
+          scope.$watch('dataUpdated', function (newVals) {
+            if (newVals) {
+              scope.dataUpdated = false;
+              return scope.render(scope.data);
+            }
+            scope.dataUpdated = false;
+          });
+          scope.render = function (data) {
+            svg.selectAll('*').remove();
+            var width = d3.select(element[0]).node().offsetWidth - margin, height = 1000;
+            svg.attr('height', height);
+            var tree = d3.layout.tree().separation(function (a, b) {
+                return a.parent === b.parent ? 1 : 0.5;
+              }).children(function (d) {
+                return d.parents;
+              }).size([
+                height / 2,
+                width
+              ]);
+            var nodes = tree.nodes(data);
+            var link = svg.selectAll('.link').data(tree.links(nodes)).enter().append('path').attr('class', 'link').attr('d', elbow);
+            var node = svg.selectAll('.node').data(nodes).enter().append('g').attr('class', 'node').attr('transform', function (d) {
+                return 'translate(' + d.y + ',' + d.x + ')';
+              });
+            node.append('text').attr('class', 'name').attr('x', 8).attr('y', -6).text(function (d) {
+              return d.name;
+            });
+          };
+        });
+      }
+    };
   }
 ]);'use strict';
 // Config HTTP Error Handling

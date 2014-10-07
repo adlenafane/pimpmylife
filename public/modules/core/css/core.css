@@ -13,3 +13,13 @@
 .ng-valid.ng-dirty{
     border-color:#78FA89;
 }
+
+.name {
+    font-weight: bold;
+}
+
+.link {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
