@@ -267,10 +267,78 @@ angular.module('infographics').config([
     $stateProvider.state('list', {
       url: '/infographics',
       templateUrl: 'modules/infographics/views/list.client.view.html'
+    }).state('addictions', {
+      url: '/infographics/addictions',
+      templateUrl: 'modules/infographics/views/addictions.client.view.html'
     }).state('get', {
       url: '/infographics/:id',
       templateUrl: 'modules/infographics/views/infographics.client.view.html'
     });
+  }
+]);'use strict';
+angular.module('infographics').controller('AddictionsController', [
+  '$scope',
+  function ($scope) {
+    $scope.$watch('addictionsData', function () {
+      if ($scope.addictionsData) {
+        $scope.d3IsUpdated = true;
+        $scope.d3AddictionsData = JSON.parse(JSON.stringify($scope.addictionsData));
+      }
+    });
+    $scope.addictionsData = {
+      'name': 'flare',
+      'children': [{
+          'name': 'analytics',
+          'children': [
+            {
+              'name': 'cluster',
+              'children': [
+                {
+                  'name': 'AgglomerativeCluster',
+                  'size': 3938
+                },
+                {
+                  'name': 'CommunityStructure',
+                  'size': 3812
+                },
+                {
+                  'name': 'HierarchicalCluster',
+                  'size': 6714
+                },
+                {
+                  'name': 'MergeEdge',
+                  'size': 743
+                }
+              ]
+            },
+            {
+              'name': 'graph',
+              'children': [
+                {
+                  'name': 'BetweennessCentrality',
+                  'size': 3534
+                },
+                {
+                  'name': 'LinkDistance',
+                  'size': 5731
+                },
+                {
+                  'name': 'MaxFlowMinCut',
+                  'size': 7840
+                },
+                {
+                  'name': 'ShortestPaths',
+                  'size': 5914
+                },
+                {
+                  'name': 'SpanningTree',
+                  'size': 3416
+                }
+              ]
+            }
+          ]
+        }]
+    };
   }
 ]);'use strict';
 angular.module('infographics').controller('InfographicsController', [
@@ -374,6 +442,85 @@ angular.module('infographics').controller('ListController', [
     $http.get('/api/infographics').success(function (data) {
       $scope.infographics = data;
     });
+  }
+]);'use strict';
+angular.module('infographics').directive('addictions', [
+  '$window',
+  'd3Service',
+  function ($window, d3Service) {
+    return {
+      restrict: 'EA',
+      scope: {
+        isUpdated: '=',
+        graphData: '='
+      },
+      link: function postLink($scope, $element, $attrs) {
+        d3Service.d3().then(function (d3) {
+          // Returns a flattened hierarchy containing all leaf nodes under the root.
+          function classes(root) {
+            var classesArray = [];
+            function recurse(name, node) {
+              if (node.children)
+                node.children.forEach(function (child) {
+                  recurse(node.name, child);
+                });
+              else
+                classesArray.push({
+                  packageName: name,
+                  className: node.name,
+                  value: node.size
+                });
+            }
+            recurse(null, root);
+            return { children: classesArray };
+          }
+          var margin = parseInt($attrs.margin) || 100;
+          var svg = d3.select($element[0]).append('svg').style('width', '100%').attr('class', 'addictions');
+          // Browser onresize event
+          $window.onresize = function () {
+            $scope.$apply();
+          };
+          // Watch for resize event
+          $scope.$watch(function () {
+            return angular.element($window)[0].innerWidth;
+          }, function () {
+            $scope.render($scope.data);
+          });
+          $scope.$watch('dataUpdated', function (newVals) {
+            if (newVals) {
+              $scope.dataUpdated = false;
+              return $scope.render($scope.data);
+            }
+            $scope.dataUpdated = false;
+          });
+          $scope.render = function (data) {
+            svg.selectAll('*').remove();
+            var diameter = $element[0].offsetWidth - margin, format = d3.format(',d'), color = d3.scale.category20c();
+            var bubble = d3.layout.pack().sort(null).size([
+                diameter,
+                diameter
+              ]).padding(1.5);
+            var node = svg.selectAll('.node').data(bubble.nodes(classes($scope.graphData)).filter(function (d) {
+                return !d.children;
+              })).enter().append('g').attr('class', 'node').attr('transform', function (d) {
+                return 'translate(' + d.x + ',' + d.y + ')';
+              });
+            node.append('title').text(function (d) {
+              return d.className + ': ' + format(d.value);
+            });
+            node.append('circle').attr('r', function (d) {
+              return d.r;
+            }).style('fill', function (d) {
+              return color(d.packageName);
+            });
+            node.append('text').attr('dy', '.3em').style('text-anchor', 'middle').text(function (d) {
+              return d.className.substring(0, d.r / 3);
+            });
+            svg.attr('height', diameter + 'px');
+          };
+        });
+      }
+    };
   }
 ]);'use strict';
 angular.module('infographics').directive('barChart', [
