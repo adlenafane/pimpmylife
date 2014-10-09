@@ -2,6 +2,13 @@
 
 angular.module('infographics').controller('AddictionsController', ['$scope',
 	function($scope) {
+    $scope.$watch('addictionsData', function() {
+      if($scope.addictionsData) {
+        $scope.d3IsUpdated = true;
+        $scope.d3AddictionsData = JSON.parse(JSON.stringify($scope.addictionsData));
+      }
+    });
+
 		$scope.addictionsData = {
        'name': 'flare',
        'children': [
