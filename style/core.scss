@@ -1,0 +1,15 @@
+/** Border Radius **/
+$border-radius-base: 0;
+$border-radius-large: 0;
+$border-radius-small: 0;
+$pager-border-radius: 0;
+
+/** Paths **/
+$icon-font-path: '../lib/bootstrap-sass-official/assets/fonts/bootstrap/';
+
+@import "../public/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
+@import "../public/modules/infographics/style/addictions.style";
+
+.content {
+  margin-top: $navbar-height;
+}
