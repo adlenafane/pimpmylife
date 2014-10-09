@@ -492,7 +492,7 @@ angular.module('infographics').directive('addictions', [
             node.append('title').text(function (d) {
               return d.className + ': ' + format(d.value);
             });
-            node.append('circle').style('fill', 'white').attr('r', 0).transition().duration(1000).attr('r', function (d) {
+            node.append('circle').attr('r', function (d) {
               return d.r;
             }).style('fill', function (d) {
               return color(d.packageName);
