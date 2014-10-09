@@ -12,7 +12,6 @@
 
     <div bar-chart="bar-chart" data-data='d3Data' data-bar-height="20" data-bar-padding="5"></div>
 
-    <pre>{{ treeData | json }}</pre>
     <div>
         <input ng-model="treeData.name">
     </div>
@@ -32,4 +31,5 @@
     </div>
 
     <div tree-chart="tree-chart" data-data='d3TreeData' data-data-updated='dataUpdated'></div>
+    <pre>{{ treeData | json }}</pre>
 </section>
