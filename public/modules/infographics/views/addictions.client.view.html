@@ -1,4 +1,13 @@
 <section data-ng-controller="AddictionsController">
-  <!-- <pre>{{ addictionsData | json }}</pre> -->
+    <h1>{{ addictionsData.name }}</h1>
+    <div data-ng-repeat="addiction in addictionsData.children track by $index">
+        <h2>{{ addiction.name }}</h2>
+        <div data-ng-repeat="item in addiction.children track by $index">
+            <input data-ng-model="item.name">
+            <input type="number" data-ng-model="item.size">
+            <button data-ng-click="addiction.children.splice($index, 1)">Supprimer</button>
+        </div>
+        <button data-ng-click="addiction.children.push({name: '', size: 0})">Ajouter</button>
+    </div>
 	<div addictions="addictions" data-graph-data="d3AddictionsData" data-is-updated="d3IsUpdated"></div>
 </section>

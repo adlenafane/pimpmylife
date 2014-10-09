@@ -44,12 +44,12 @@ angular.module('infographics').directive('addictions', [
             $scope.render($scope.data);
           });
 
-          $scope.$watch('dataUpdated', function(newVals) {
+          $scope.$watch('isUpdated', function(newVals) {
             if (newVals) {
-              $scope.dataUpdated = false;
+              $scope.isUpdated = false;
               return $scope.render($scope.data);
             }
-            $scope.dataUpdated = false;
+            $scope.isUpdated = false;
           });
 
           $scope.render = function(data) {
@@ -75,6 +75,10 @@ angular.module('infographics').directive('addictions', [
               .text(function(d) { return d.className + ': ' + format(d.value); });
 
             node.append('circle')
+              .style('fill', 'white')
+              .attr('r', 0)
+              .transition()
+              .duration(1000)
               .attr('r', function(d) { return d.r; })
               .style('fill', function(d) { return color(d.packageName); });
 

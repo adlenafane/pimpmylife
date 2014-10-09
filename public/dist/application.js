@@ -284,60 +284,44 @@ angular.module('infographics').controller('AddictionsController', [
         $scope.d3IsUpdated = true;
         $scope.d3AddictionsData = JSON.parse(JSON.stringify($scope.addictionsData));
       }
-    });
+    }, true);
     $scope.addictionsData = {
-      'name': 'flare',
-      'children': [{
-          'name': 'analytics',
+      'name': 'Addictions',
+      'children': [
+        {
+          'name': 'Alimentation',
           'children': [
             {
-              'name': 'cluster',
-              'children': [
-                {
-                  'name': 'AgglomerativeCluster',
-                  'size': 3938
-                },
-                {
-                  'name': 'CommunityStructure',
-                  'size': 3812
-                },
-                {
-                  'name': 'HierarchicalCluster',
-                  'size': 6714
-                },
-                {
-                  'name': 'MergeEdge',
-                  'size': 743
-                }
-              ]
+              'name': 'Nutella',
+              'size': 10
             },
             {
-              'name': 'graph',
-              'children': [
-                {
-                  'name': 'BetweennessCentrality',
-                  'size': 3534
-                },
-                {
-                  'name': 'LinkDistance',
-                  'size': 5731
-                },
-                {
-                  'name': 'MaxFlowMinCut',
-                  'size': 7840
-                },
-                {
-                  'name': 'ShortestPaths',
-                  'size': 5914
-                },
-                {
-                  'name': 'SpanningTree',
-                  'size': 3416
-                }
-              ]
+              'name': 'Granola',
+              'size': 15
+            },
+            {
+              'name': 'Oreo',
+              'size': 37
+            },
+            {
+              'name': 'Starbucks',
+              'size': 77
             }
           ]
-        }]
+        },
+        {
+          'name': 'Sport',
+          'children': []
+        },
+        {
+          'name': 'Sexe',
+          'children': []
+        },
+        {
+          'name': 'Drogue',
+          'children': []
+        }
+      ]
     };
   }
 ]);'use strict';
@@ -486,12 +470,12 @@ angular.module('infographics').directive('addictions', [
           }, function () {
             $scope.render($scope.data);
           });
-          $scope.$watch('dataUpdated', function (newVals) {
+          $scope.$watch('isUpdated', function (newVals) {
             if (newVals) {
-              $scope.dataUpdated = false;
+              $scope.isUpdated = false;
               return $scope.render($scope.data);
             }
-            $scope.dataUpdated = false;
+            $scope.isUpdated = false;
           });
           $scope.render = function (data) {
             svg.selectAll('*').remove();
@@ -508,7 +492,7 @@ angular.module('infographics').directive('addictions', [
             node.append('title').text(function (d) {
               return d.className + ': ' + format(d.value);
             });
-            node.append('circle').attr('r', function (d) {
+            node.append('circle').style('fill', 'white').attr('r', 0).transition().duration(1000).attr('r', function (d) {
               return d.r;
             }).style('fill', function (d) {
               return color(d.packageName);
