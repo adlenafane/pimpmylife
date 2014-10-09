@@ -479,7 +479,7 @@ angular.module('infographics').directive('addictions', [
           });
           $scope.render = function (data) {
             svg.selectAll('*').remove();
-            var diameter = $element[0].offsetWidth - margin, format = d3.format(',d'), color = d3.scale.category20c();
+            var diameter = $element[0].offsetWidth - margin, format = d3.format(',d'), color = d3.scale.category10();
             var bubble = d3.layout.pack().sort(null).size([
                 diameter,
                 diameter

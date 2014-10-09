@@ -57,7 +57,7 @@ angular.module('infographics').directive('addictions', [
 
             var diameter = $element[0].offsetWidth - margin,
               format = d3.format(',d'),
-              color = d3.scale.category20c();
+              color = d3.scale.category10();
 
             var bubble = d3.layout.pack()
               .sort(null)
