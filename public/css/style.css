@@ -5292,6 +5292,11 @@ button.close {
 .row + .row {
   margin-top: 0.5em; }
 
+.addictions-form h2 {
+  text-align: center; }
+.addictions-form .addiction {
+  margin-bottom: 1em; }
+
 .content {
   margin-top: 50px; }
 
