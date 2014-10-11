@@ -111,6 +111,28 @@ angular.module('infographics').directive('addictions', [
               $scope.$emit('NODE_CLICKED', d);
             });
 
+            svg.on('click', function () {
+              var coords = d3.mouse(this);
+              var minDistance = Infinity;
+              var closestNeighbour = null;
+
+              // Compute distance from clicked point to perimeter of given circle (d)
+              var getDistance = function (d) {
+                return Math.sqrt(Math.pow(d.x - coords[0] ,2) + Math.pow(d.y - coords[1] ,2)) - d.r;
+              };
+
+              svg.selectAll('circle').each(function (d, i) {
+                var curDistance = getDistance(d);
+                if (curDistance < minDistance) {
+                  minDistance = curDistance;
+                  closestNeighbour = d;
+                }
+              });
+
+              // Append a new node to the package of the closest circle
+              $scope.$emit('APPEND_NODE_TO_PACKAGE', closestNeighbour.packageName);
+            });
+
             svg.attr('height', diameter + 'px');
           };
         });
