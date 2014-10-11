@@ -1,13 +1,91 @@
-.row + .row {
+.row + .row, .form-control + .form-control {
   margin-top: 0.5em;
 }
 
-.addictions-form {
-  h2 {
+.addiction {
+  margin-bottom: 1em;
+  color: white;
+
+  &:nth-of-type(1) {
+    button {
+      background-color: #EF4836;
+    }
+  }
+  &:nth-of-type(2) {
+    button {
+      background-color: #663399;
+    }
+  }
+  &:nth-of-type(3) {
+    button {
+      background-color: #913D88;
+    }
+  }
+  &:nth-of-type(4) {
+    button {
+      background-color: #4183D7;
+    }
+  }
+  &:nth-of-type(5) {
+    button {
+      background-color: #336E7B;
+    }
+  }
+  &:nth-of-type(6) {
+    button {
+      background-color: #4ECDC4;
+    }
+  }
+  &:nth-of-type(7) {
+    button {
+      background-color: #87D37C;
+    }
+  }
+  &:nth-of-type(8) {
+    button {
+      background-color: #26A65B;
+    }
+  }
+  &:nth-of-type(9) {
+    button {
+      background-color: #F89406;
+    }
+  }
+  &:nth-of-type(10) {
+    button {
+      background-color: #F5AB35;
+    }
+  }
+  &:nth-of-type(11) {
+    button {
+      background-color: #6C7A89;
+    }
+  }
+  &:nth-of-type(12) {
+    button {
+      background-color: #95A5A6;
+    }
+  }
+}
+
+.edit-panel {
+  background-color: white;
+  border: 1px solid $gray;
+  padding: 0.5em 1em;
+  position: absolute;
+  @include translate(-50%, 0);
+
+  h3 {
+    margin-top: 0;
     text-align: center;
   }
+}
 
-  .addiction {
-    margin-bottom: 1em;
-  }
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.6);
 }

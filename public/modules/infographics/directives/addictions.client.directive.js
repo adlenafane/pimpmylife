@@ -18,7 +18,12 @@ angular.module('infographics').directive('addictions', [
 
             function recurse(name, node) {
               if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-              else classesArray.push({packageName: name, className: node.name, value: node.size});
+              else classesArray.push({
+                packageName: name,
+                className: node.name,
+                value: node.size,
+                nodeId: node.nodeId
+              });
             }
 
             recurse(null, root);
@@ -59,6 +64,25 @@ angular.module('infographics').directive('addictions', [
               format = d3.format(',d'),
               color = d3.scale.category10();
 
+            color = function(addiction) {
+              var colors = {
+                Alimentation: '#EF4836',
+                Alcool: '#663399',
+                Sommeil: '#913D88',
+                Travail: '#4183D7',
+                Technologie: '#336E7B',
+                Shopping: '#4ECDC4',
+                Culture: '#87D37C',
+                Sorties: '#26A65B',
+                Jeux: '#F89406',
+                Sport: '#F5AB35',
+                Sexe: '#6C7A89',
+                Drogue: '#95A5A6'
+              };
+
+              return colors[addiction];
+            };
+
             var bubble = d3.layout.pack()
               .sort(null)
               .size([diameter, diameter])
@@ -82,6 +106,10 @@ angular.module('infographics').directive('addictions', [
               .attr('dy', '.3em')
               .style('text-anchor', 'middle')
               .text(function(d) { return d.className.substring(0, d.r / 3); });
+
+            node.on('click', function (d) {
+              $scope.$emit('NODE_CLICKED', d);
+            });
 
             svg.attr('height', diameter + 'px');
           };
