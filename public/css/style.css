@@ -5292,16 +5292,18 @@ button.close {
 .row + .row, .form-control + .form-control {
   margin-top: 0.5em; }
 
-.addictions-form h2 {
-  text-align: center; }
-.addictions-form .addiction {
+.addiction {
   margin-bottom: 1em; }
 
 .edit-panel {
   background-color: white;
   border: 1px solid #555555;
   padding: 0.5em 1em;
-  position: absolute; }
+  position: absolute;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); }
 
 .overlay {
   position: fixed;

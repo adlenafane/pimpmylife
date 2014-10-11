@@ -2,14 +2,8 @@
   margin-top: 0.5em;
 }
 
-.addictions-form {
-  h2 {
-    text-align: center;
-  }
-
-  .addiction {
-    margin-bottom: 1em;
-  }
+.addiction {
+  margin-bottom: 1em;
 }
 
 .edit-panel {
@@ -17,6 +11,7 @@
   border: 1px solid $gray;
   padding: 0.5em 1em;
   position: absolute;
+  @include translate(-50%, 0);
 }
 
 .overlay {

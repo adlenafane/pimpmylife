@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('infographics').controller('AddictionsController',['$scope', '$window',
-  function($scope, $window) {
+angular.module('infographics').controller('AddictionsController',['$scope',
+  function($scope) {
     $scope.$watch('addictionsData', function() {
       if($scope.addictionsData) {
         $scope.d3IsUpdated = true;
@@ -13,15 +13,37 @@ angular.module('infographics').controller('AddictionsController',['$scope', '$wi
     $scope.panelPosition = {};
 
     $scope.addNode = function(addiction) {
-      addiction.children.push({name: '', size: 0, nodeId: $scope.nodeCount});
+      var node = {
+        name: '',
+        size: 0,
+        nodeId: $scope.nodeCount,
+        packageName: addiction.name,
+        className: '',
+        top: '50%',
+        left: '50%'
+      };
+      addiction.children.push(node);
+      $scope.$broadcast('NODE_CLICKED', node);
       $scope.nodeCount++;
     };
 
     $scope.editNode = function(d) {
+      var top, left;
       $scope.showPanel = true;
+      if (d.top) {
+        top = d.top;
+      } else {
+        top = (d.y + 100) + 'px';
+      }
+      if (d.left) {
+        left = d.left;
+      } else {
+        left = d.x + 'px';
+      }
+
       $scope.panelPosition = {
-        'top': d.y + 'px',
-        'left': d.x + 'px'
+        'top': top,
+        'left': left
       };
       var parentIndex, currentIndex = 0;
       $scope.addictionsData.children.map(function (element, index) {
@@ -39,7 +61,9 @@ angular.module('infographics').controller('AddictionsController',['$scope', '$wi
         $scope.showPanel = false;
       };
 
-      $scope.$apply();
+      if(!$scope.$$phase) {
+        $scope.$apply();
+      }
     };
 
     $scope.$on('NODE_CLICKED', function (event, d) {
