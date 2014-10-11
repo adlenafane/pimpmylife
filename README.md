@@ -5,7 +5,7 @@
 * Node, NPM
 * MongoDB
 
-## Instatallation
+## Installation
 
 * Launch mongo
 * npm install

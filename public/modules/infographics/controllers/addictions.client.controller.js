@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('infographics').controller('AddictionsController', ['$scope',
-	function($scope) {
+angular.module('infographics').controller('AddictionsController',['$scope',
+  function($scope) {
     $scope.$watch('addictionsData', function() {
       if($scope.addictionsData) {
         $scope.d3IsUpdated = true;
@@ -9,7 +9,7 @@ angular.module('infographics').controller('AddictionsController', ['$scope',
       }
     }, true);
 
-		$scope.addictionsData = {
+    $scope.addictionsData = {
       'name': 'Addictions',
       'children': [
         {
@@ -20,6 +20,38 @@ angular.module('infographics').controller('AddictionsController', ['$scope',
             {'name': 'Oreo', 'size': 37},
             {'name': 'Starbucks', 'size': 77}
           ]
+        },
+        {
+          'name': 'Alcool',
+          'children': []
+        },
+        {
+          'name': 'Sommeil',
+          'children': []
+        },
+        {
+          'name': 'Travail',
+          'children': []
+        },
+        {
+          'name': 'Technologie',
+          'children': []
+        },
+        {
+          'name': 'Shopping',
+          'children': []
+        },
+        {
+          'name': 'Culture',
+          'children': []
+        },
+        {
+          'name': 'Sorties',
+          'children': []
+        },
+        {
+          'name': 'Jeux',
+          'children': []
         },
         {
           'name': 'Sport',
