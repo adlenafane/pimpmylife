@@ -5289,7 +5289,7 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-.row + .row, .form-control + .form-control {
+.form-control + .form-control {
   margin-top: 0.5em; }
 
 .addiction {
@@ -5341,6 +5341,9 @@ button.close {
   bottom: 0;
   left: 0;
   background: rgba(0, 0, 0, 0.6); }
+
+[addictions] {
+  text-align: center; }
 
 .content {
   margin-top: 50px; }

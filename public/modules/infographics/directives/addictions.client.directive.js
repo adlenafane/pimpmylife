@@ -32,9 +32,11 @@ angular.module('infographics').directive('addictions', [
 
           var margin = parseInt($attrs.margin) || 0;
 
+          var size = Math.min($element[0].offsetWidth - margin, $window.innerHeight);
+
           var svg = d3.select($element[0])
             .append('svg')
-            .style('width', '100%')
+            .style('width', size)
             .attr('class', 'addictions');
 
           // Browser onresize event
@@ -60,9 +62,9 @@ angular.module('infographics').directive('addictions', [
           $scope.render = function(data) {
             svg.selectAll('*').remove();
 
-            var diameter = $element[0].offsetWidth - margin,
+            var diameter = size,
               format = d3.format(',d'),
-              color = d3.scale.category10();
+              color;
 
             color = function(addiction) {
               var colors = {
