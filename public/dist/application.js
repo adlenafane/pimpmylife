@@ -330,6 +330,7 @@ angular.module('infographics').controller('AddictionsController', [
         }
       });
       $scope.currentItem = $scope.addictionsData.children[parentIndex].children[currentIndex];
+      $scope.currentItem.addiction = $scope.addictionsData.children[parentIndex].name;
       $scope.deleteCurrentNode = function () {
         $scope.addictionsData.children[parentIndex].children.splice(currentIndex, 1);
         $scope.showPanel = false;
@@ -551,7 +552,7 @@ angular.module('infographics').directive('addictions', [
             recurse(null, root);
             return { children: classesArray };
           }
-          var margin = parseInt($attrs.margin) || 100;
+          var margin = parseInt($attrs.margin) || 0;
           var svg = d3.select($element[0]).append('svg').style('width', '100%').attr('class', 'addictions');
           // Browser onresize event
           $window.onresize = function () {
@@ -573,6 +574,23 @@ angular.module('infographics').directive('addictions', [
           $scope.render = function (data) {
             svg.selectAll('*').remove();
             var diameter = $element[0].offsetWidth - margin, format = d3.format(',d'), color = d3.scale.category10();
+            color = function (addiction) {
+              var colors = {
+                  Alimentation: '#EF4836',
+                  Alcool: '#663399',
+                  Sommeil: '#913D88',
+                  Travail: '#4183D7',
+                  Technologie: '#336E7B',
+                  Shopping: '#4ECDC4',
+                  Culture: '#87D37C',
+                  Sorties: '#26A65B',
+                  Jeux: '#F89406',
+                  Sport: '#F5AB35',
+                  Sexe: '#6C7A89',
+                  Drogue: '#95A5A6'
+                };
+              return colors[addiction];
+            };
             var bubble = d3.layout.pack().sort(null).size([
                 diameter,
                 diameter
