@@ -553,7 +553,8 @@ angular.module('infographics').directive('addictions', [
             return { children: classesArray };
           }
           var margin = parseInt($attrs.margin) || 0;
-          var svg = d3.select($element[0]).append('svg').style('width', '100%').attr('class', 'addictions');
+          var size = Math.min($element[0].offsetWidth - margin, $window.innerHeight);
+          var svg = d3.select($element[0]).append('svg').style('width', size).attr('class', 'addictions');
           // Browser onresize event
           $window.onresize = function () {
             $scope.$apply();
@@ -573,7 +574,7 @@ angular.module('infographics').directive('addictions', [
           });
           $scope.render = function (data) {
             svg.selectAll('*').remove();
-            var diameter = $element[0].offsetWidth - margin, format = d3.format(',d'), color = d3.scale.category10();
+            var diameter = size, format = d3.format(',d'), color;
             color = function (addiction) {
               var colors = {
                   Alimentation: '#EF4836',
