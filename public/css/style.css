@@ -5289,13 +5289,27 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-.row + .row {
+.row + .row, .form-control + .form-control {
   margin-top: 0.5em; }
 
 .addictions-form h2 {
   text-align: center; }
 .addictions-form .addiction {
   margin-bottom: 1em; }
+
+.edit-panel {
+  background-color: white;
+  border: 1px solid #555555;
+  padding: 0.5em 1em;
+  position: absolute; }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6); }
 
 .content {
   margin-top: 50px; }

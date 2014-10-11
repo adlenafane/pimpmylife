@@ -18,7 +18,12 @@ angular.module('infographics').directive('addictions', [
 
             function recurse(name, node) {
               if (node.children) node.children.forEach(function(child) { recurse(node.name, child); });
-              else classesArray.push({packageName: name, className: node.name, value: node.size});
+              else classesArray.push({
+                packageName: name,
+                className: node.name,
+                value: node.size,
+                nodeId: node.nodeId
+              });
             }
 
             recurse(null, root);
@@ -82,6 +87,10 @@ angular.module('infographics').directive('addictions', [
               .attr('dy', '.3em')
               .style('text-anchor', 'middle')
               .text(function(d) { return d.className.substring(0, d.r / 3); });
+
+            node.on('click', function (d) {
+              $scope.$emit('NODE_CLICKED', d);
+            });
 
             svg.attr('height', diameter + 'px');
           };
