@@ -30,7 +30,7 @@ angular.module('infographics').directive('addictions', [
             return {children: classesArray};
           }
 
-          var margin = parseInt($attrs.margin) || 100;
+          var margin = parseInt($attrs.margin) || 0;
 
           var svg = d3.select($element[0])
             .append('svg')

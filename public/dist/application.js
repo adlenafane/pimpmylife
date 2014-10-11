@@ -290,7 +290,7 @@ angular.module('infographics').controller('AddictionsController', [
     $scope.addNode = function (addiction) {
       var node = {
           name: '',
-          size: 0,
+          size: 1,
           nodeId: $scope.nodeCount,
           packageName: addiction.name,
           className: '',
@@ -341,6 +341,14 @@ angular.module('infographics').controller('AddictionsController', [
     };
     $scope.$on('NODE_CLICKED', function (event, d) {
       $scope.editNode(d);
+    });
+    $scope.$on('APPEND_NODE_TO_PACKAGE', function (event, packageName) {
+      var addiction = $scope.addictionsData.children.filter(function (addiction) {
+          return addiction.name === packageName;
+        })[0];
+      if (addiction !== undefined) {
+        $scope.addNode(addiction);
+      }
     });
     $scope.addictionsData = {
       name: 'Addictions',
@@ -552,7 +560,7 @@ angular.module('infographics').directive('addictions', [
             recurse(null, root);
             return { children: classesArray };
           }
-          var margin = parseInt($attrs.margin) || 100;
+          var margin = parseInt($attrs.margin) || 0;
           var svg = d3.select($element[0]).append('svg').style('width', '100%').attr('class', 'addictions');
           // Browser onresize event
           $window.onresize = function () {
@@ -613,6 +621,24 @@ angular.module('infographics').directive('addictions', [
             });
             node.on('click', function (d) {
               $scope.$emit('NODE_CLICKED', d);
+            });
+            svg.on('click', function () {
+              var coords = d3.mouse(this);
+              var minDistance = Infinity;
+              var closestNeighbour = null;
+              // Compute distance from clicked point to perimeter of given circle (d)
+              var getDistance = function (d) {
+                return Math.sqrt(Math.pow(d.x - coords[0], 2) + Math.pow(d.y - coords[1], 2)) - d.r;
+              };
+              svg.selectAll('circle').each(function (d, i) {
+                var curDistance = getDistance(d);
+                if (curDistance < minDistance) {
+                  minDistance = curDistance;
+                  closestNeighbour = d;
+                }
+              });
+              // Append a new node to the package of the closest circle
+              $scope.$emit('APPEND_NODE_TO_PACKAGE', closestNeighbour.packageName);
             });
             svg.attr('height', diameter + 'px');
           };
