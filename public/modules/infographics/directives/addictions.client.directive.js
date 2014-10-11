@@ -78,10 +78,10 @@ angular.module('infographics').directive('addictions', [
                 Sport: '#F5AB35',
                 Sexe: '#6C7A89',
                 Drogue: '#95A5A6'
-              }
+              };
 
-              return colors[addiction]
-            }
+              return colors[addiction];
+            };
 
             var bubble = d3.layout.pack()
               .sort(null)
