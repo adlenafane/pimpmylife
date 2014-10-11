@@ -55,6 +55,7 @@ angular.module('infographics').controller('AddictionsController',['$scope',
       });
 
       $scope.currentItem = $scope.addictionsData.children[parentIndex].children[currentIndex];
+      $scope.currentItem.addiction = $scope.addictionsData.children[parentIndex].name;
 
       $scope.deleteCurrentNode = function() {
         $scope.addictionsData.children[parentIndex].children.splice(currentIndex, 1);
