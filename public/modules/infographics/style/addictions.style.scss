@@ -11,7 +11,7 @@ $color-10: #F5AB35;
 $color-11: #6C7A89;
 $color-12: #95A5A6;
 
-$list: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color-7 $color-8 $color-9 $color-10 $color-11 $color-12;
+$addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color-7 $color-8 $color-9 $color-10 $color-11 $color-12;
 
 .row + .row, .form-control + .form-control {
   margin-top: 0.5em;
@@ -21,70 +21,14 @@ $list: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color-7 $color-8 $
   margin-bottom: 1em;
   color: white;
 
-  @for $i from 1 through length($list) {
+  @for $i from 1 through length($addictions-colors) {
     &:nth-of-type(#{$i}) {
       button {
-        background-color: nth($list, $i);
+        background-color: nth($addictions-colors, $i);
       }
     }
   }
 }
-
-  // &:nth-of-type(2) {
-  //   button {
-  //     background-color: #663399;
-  //   }
-  // }
-  // &:nth-of-type(3) {
-  //   button {
-  //     background-color: #913D88;
-  //   }
-  // }
-  // &:nth-of-type(4) {
-  //   button {
-  //     background-color: #4183D7;
-  //   }
-  // }
-  // &:nth-of-type(5) {
-  //   button {
-  //     background-color: #336E7B;
-  //   }
-  // }
-  // &:nth-of-type(6) {
-  //   button {
-  //     background-color: #4ECDC4;
-  //   }
-  // }
-  // &:nth-of-type(7) {
-  //   button {
-  //     background-color: #87D37C;
-  //   }
-  // }
-  // &:nth-of-type(8) {
-  //   button {
-  //     background-color: #26A65B;
-  //   }
-  // }
-  // &:nth-of-type(9) {
-  //   button {
-  //     background-color: #F89406;
-  //   }
-  // }
-  // &:nth-of-type(10) {
-  //   button {
-  //     background-color: #F5AB35;
-  //   }
-  // }
-  // &:nth-of-type(11) {
-  //   button {
-  //     background-color: #6C7A89;
-  //   }
-  // }
-  // &:nth-of-type(12) {
-  //   button {
-  //     background-color: #95A5A6;
-  //   }
-  // }
 
 .edit-panel {
   background-color: white;
