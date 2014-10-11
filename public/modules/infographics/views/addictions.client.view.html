@@ -17,6 +17,7 @@
     </div>
     <div class="overlay" data-ng-show="showPanel" data-ng-click="showPanel = false"></div>
     <div class="edit-panel" data-ng-show="showPanel" data-ng-style="panelPosition">
+        <small>add an addiction to</small>
         <h3>{{ currentItem.addiction }}</h3>
         <input class="form-control" data-ng-model="currentItem.name">
         <input type="number" class="form-control" data-ng-model="currentItem.size" min="0">
