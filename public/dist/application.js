@@ -310,6 +310,38 @@ angular.module('infographics').controller('AddictionsController', [
           ]
         },
         {
+          'name': 'Alcool',
+          'children': []
+        },
+        {
+          'name': 'Sommeil',
+          'children': []
+        },
+        {
+          'name': 'Travail',
+          'children': []
+        },
+        {
+          'name': 'Technologie',
+          'children': []
+        },
+        {
+          'name': 'Shopping',
+          'children': []
+        },
+        {
+          'name': 'Culture',
+          'children': []
+        },
+        {
+          'name': 'Sorties',
+          'children': []
+        },
+        {
+          'name': 'Jeux',
+          'children': []
+        },
+        {
           'name': 'Sport',
           'children': []
         },
