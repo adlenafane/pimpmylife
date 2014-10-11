@@ -15,7 +15,7 @@ angular.module('infographics').controller('AddictionsController',['$scope',
     $scope.addNode = function(addiction) {
       var node = {
         name: '',
-        size: 0,
+        size: 1,
         nodeId: $scope.nodeCount,
         packageName: addiction.name,
         className: '',
@@ -69,6 +69,16 @@ angular.module('infographics').controller('AddictionsController',['$scope',
 
     $scope.$on('NODE_CLICKED', function (event, d) {
       $scope.editNode(d);
+    });
+
+    $scope.$on('APPEND_NODE_TO_PACKAGE', function (event, packageName) {
+      var addiction = $scope.addictionsData.children.filter(function (addiction) {
+        return addiction.name === packageName;
+      })[0];
+
+      if (addiction !== undefined) {
+        $scope.addNode(addiction);
+      }
     });
 
     $scope.addictionsData = {
