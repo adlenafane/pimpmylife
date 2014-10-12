@@ -87,7 +87,7 @@ angular.module('infographics').controller('AddictionsController',['$scope',
       children: [
         {
           name: 'Alimentation',
-          placeholder: 'Bonbons',
+          placeholder: 'Ex: Bonbons',
           children: [
             {name: 'Nutella', size: 10, nodeId: -1},
             {name: 'Granola', size: 15, nodeId: -2},
@@ -97,57 +97,57 @@ angular.module('infographics').controller('AddictionsController',['$scope',
         },
         {
           name: 'Alcool',
-          placeholder: 'Vodka',
+          placeholder: 'Ex: Vodka',
           children: []
         },
         {
           name: 'Sommeil',
-          placeholder: 'Siestes',
+          placeholder: 'Ex: Siestes',
           children: []
         },
         {
           name: 'Travail',
-          placeholder: 'Fignolage',
+          placeholder: 'Ex: Fignolage',
           children: []
         },
         {
           name: 'Technologie',
-          placeholder: 'Facebook',
+          placeholder: 'Ex: Facebook',
           children: []
         },
         {
           name: 'Shopping',
-          placeholder: 'Zara',
+          placeholder: 'Ex: Zara',
           children: []
         },
         {
           name: 'Culture',
-          placeholder: 'Théâtre',
+          placeholder: 'Ex: Théâtre',
           children: []
         },
         {
           name: 'Sorties',
-          placeholder: 'Club',
+          placeholder: 'Ex: Club',
           children: []
         },
         {
           name: 'Jeux',
-          placeholder: 'Poker',
+          placeholder: 'Ex: Poker',
           children: []
         },
         {
           name: 'Sport',
-          placeholder: 'Footing',
+          placeholder: 'Ex: Footing',
           children: []
         },
         {
           name: 'Sexe',
-          placeholder: 'Au réveil',
+          placeholder: 'Ex: Au réveil',
           children: []
         },
         {
           name: 'Drogue',
-          placeholder: 'Cigarettes',
+          placeholder: 'Ex: Cigarettes',
           children: []
         }
       ]

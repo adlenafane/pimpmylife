@@ -293,6 +293,7 @@ angular.module('infographics').controller('AddictionsController', [
           size: 1,
           nodeId: $scope.nodeCount,
           packageName: addiction.name,
+          placeholder: addiction.placeholder,
           className: '',
           top: '50%',
           left: '50%'
@@ -355,6 +356,7 @@ angular.module('infographics').controller('AddictionsController', [
       children: [
         {
           name: 'Alimentation',
+          placeholder: 'Ex: Bonbons',
           children: [
             {
               name: 'Nutella',
@@ -380,46 +382,57 @@ angular.module('infographics').controller('AddictionsController', [
         },
         {
           name: 'Alcool',
+          placeholder: 'Ex: Vodka',
           children: []
         },
         {
           name: 'Sommeil',
+          placeholder: 'Ex: Siestes',
           children: []
         },
         {
           name: 'Travail',
+          placeholder: 'Ex: Fignolage',
           children: []
         },
         {
           name: 'Technologie',
+          placeholder: 'Ex: Facebook',
           children: []
         },
         {
           name: 'Shopping',
+          placeholder: 'Ex: Zara',
           children: []
         },
         {
           name: 'Culture',
+          placeholder: 'Ex: Th\xe9\xe2tre',
           children: []
         },
         {
           name: 'Sorties',
+          placeholder: 'Ex: Club',
           children: []
         },
         {
           name: 'Jeux',
+          placeholder: 'Ex: Poker',
           children: []
         },
         {
           name: 'Sport',
+          placeholder: 'Ex: Footing',
           children: []
         },
         {
           name: 'Sexe',
+          placeholder: 'Ex: Au r\xe9veil',
           children: []
         },
         {
           name: 'Drogue',
+          placeholder: 'Ex: Cigarettes',
           children: []
         }
       ]
@@ -554,6 +567,7 @@ angular.module('infographics').directive('addictions', [
                   packageName: name,
                   className: node.name,
                   value: node.size,
+                  placeholder: node.placeholder,
                   nodeId: node.nodeId
                 });
             }
@@ -694,6 +708,18 @@ angular.module('infographics').directive('barChart', [
             });
           };
         });
+      }
+    };
+  }
+]);'use strict';
+angular.module('infographics').directive('focus', [
+  '$timeout',
+  function focus($timeout) {
+    return {
+      link: function ($scope, $element) {
+        $timeout(function () {
+          $element[0].focus();
+        }, 50);
       }
     };
   }
