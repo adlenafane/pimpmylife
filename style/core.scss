@@ -5,7 +5,22 @@ $border-radius-small: 0;
 $pager-border-radius: 0;
 
 /** Paths **/
-$icon-font-path: '../lib/bootstrap-sass-official/assets/fonts/bootstrap/';
+$icon-font-path: "../lib/bootstrap-sass-official/assets/fonts/bootstrap/";
+
+@font-face {
+  font-family: 'atlas_sansmedium';
+  src: url('fonts/atlas_sans-webfont.eot');
+  src: url('fonts/atlas_sans-webfont.eot?#iefix') format('embedded-opentype'),
+       url('fonts/atlas_sans-webfont.woff2') format('woff2'),
+       url('fonts/atlas_sans-webfont.woff') format('woff'),
+       url('fonts/atlas_sans-webfont.ttf') format('truetype'),
+       url('fonts/atlas_sans-webfont.svg#atlas_sansmedium') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+$font-family-sans-serif: 'atlas_sansmedium', Helvetica, Arial, sans-serif !default;
 
 @import "../public/lib/bootstrap-sass-official/assets/stylesheets/bootstrap";
 @import "../public/modules/infographics/style/addictions.style";
