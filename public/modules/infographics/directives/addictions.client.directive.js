@@ -106,6 +106,8 @@ angular.module('infographics').directive('addictions', [
 
             node.append('text')
               .attr('dy', '.3em')
+              .style('font-size', '1.3em')
+              .style('fill', 'white')
               .style('text-anchor', 'middle')
               .text(function(d) { return d.className.substring(0, d.r / 3); });
 

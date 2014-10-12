@@ -617,7 +617,7 @@ angular.module('infographics').directive('addictions', [
             }).style('fill', function (d) {
               return color(d.packageName);
             });
-            node.append('text').attr('dy', '.3em').style('text-anchor', 'middle').text(function (d) {
+            node.append('text').attr('dy', '.3em').style('font-size', '1.3em').style('fill', 'white').style('text-anchor', 'middle').text(function (d) {
               return d.className.substring(0, d.r / 3);
             });
             node.on('click', function (d) {
