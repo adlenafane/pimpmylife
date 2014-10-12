@@ -110,7 +110,14 @@ angular.module('infographics').directive('addictions', [
               .style('font-size', '1.3em')
               .style('fill', 'white')
               .style('text-anchor', 'middle')
-              .text(function(d) { return d.className.substring(0, d.r / 3); });
+              .text(function(d) { return d.className.substring(0, d.r / 3); })
+              .style('font-size', function (d) {
+                var bbox = this.getBBox(),
+                  cbox = this.parentNode.getBBox(),
+                  coeff;
+                coeff = 0.8 * cbox.width/bbox.width;
+                return (coeff * 12) + 'px';
+              });
 
             node.on('click', function (d) {
               d3.event.stopPropagation();
