@@ -9,12 +9,12 @@ $icon-font-path: "../lib/bootstrap-sass-official/assets/fonts/bootstrap/";
 
 @font-face {
   font-family: 'atlas_sansmedium';
-  src: url('fonts/atlas_sans-webfont.eot');
-  src: url('fonts/atlas_sans-webfont.eot?#iefix') format('embedded-opentype'),
-       url('fonts/atlas_sans-webfont.woff2') format('woff2'),
-       url('fonts/atlas_sans-webfont.woff') format('woff'),
-       url('fonts/atlas_sans-webfont.ttf') format('truetype'),
-       url('fonts/atlas_sans-webfont.svg#atlas_sansmedium') format('svg');
+  src: url('../css/fonts/atlas_sans-webfont.eot');
+  src: url('../css/fonts/atlas_sans-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../css/fonts/atlas_sans-webfont.woff2') format('woff2'),
+       url('../css/fonts/atlas_sans-webfont.woff') format('woff'),
+       url('../css/fonts/atlas_sans-webfont.ttf') format('truetype'),
+       url('../css/fonts/atlas_sans-webfont.svg#atlas_sansmedium') format('svg');
   font-weight: normal;
   font-style: normal;
 }
