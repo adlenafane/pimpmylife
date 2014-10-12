@@ -110,6 +110,7 @@ angular.module('infographics').directive('addictions', [
               .text(function(d) { return d.className.substring(0, d.r / 3); });
 
             node.on('click', function (d) {
+              d3.event.stopPropagation();
               $scope.$emit('NODE_CLICKED', d);
             });
 
