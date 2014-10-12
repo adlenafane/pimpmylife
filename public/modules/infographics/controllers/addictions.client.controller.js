@@ -18,6 +18,7 @@ angular.module('infographics').controller('AddictionsController',['$scope',
         size: 1,
         nodeId: $scope.nodeCount,
         packageName: addiction.name,
+        placeholder: addiction.placeholder,
         className: '',
         top: '50%',
         left: '50%'
@@ -86,6 +87,7 @@ angular.module('infographics').controller('AddictionsController',['$scope',
       children: [
         {
           name: 'Alimentation',
+          placeholder: 'Bonbons',
           children: [
             {name: 'Nutella', size: 10, nodeId: -1},
             {name: 'Granola', size: 15, nodeId: -2},
@@ -95,46 +97,57 @@ angular.module('infographics').controller('AddictionsController',['$scope',
         },
         {
           name: 'Alcool',
+          placeholder: 'Vodka',
           children: []
         },
         {
           name: 'Sommeil',
+          placeholder: 'Siestes',
           children: []
         },
         {
           name: 'Travail',
+          placeholder: 'Fignolage',
           children: []
         },
         {
           name: 'Technologie',
+          placeholder: 'Facebook',
           children: []
         },
         {
           name: 'Shopping',
+          placeholder: 'Zara',
           children: []
         },
         {
           name: 'Culture',
+          placeholder: 'Théâtre',
           children: []
         },
         {
           name: 'Sorties',
+          placeholder: 'Club',
           children: []
         },
         {
           name: 'Jeux',
+          placeholder: 'Poker',
           children: []
         },
         {
           name: 'Sport',
+          placeholder: 'Footing',
           children: []
         },
         {
           name: 'Sexe',
+          placeholder: 'Au réveil',
           children: []
         },
         {
           name: 'Drogue',
+          placeholder: 'Cigarettes',
           children: []
         }
       ]

@@ -22,6 +22,7 @@ angular.module('infographics').directive('addictions', [
                 packageName: name,
                 className: node.name,
                 value: node.size,
+                placeholder: node.placeholder,
                 nodeId: node.nodeId
               });
             }
