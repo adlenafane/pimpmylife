@@ -308,12 +308,12 @@ angular.module('infographics').controller('AddictionsController', [
       if (d.top) {
         top = d.top;
       } else {
-        top = d.y + 100 + 'px';
+        top = d.y + 'px';
       }
       if (d.left) {
         left = d.left;
       } else {
-        left = d.x + 'px';
+        left = d.x + 50 + 'px';
       }
       $scope.panelPosition = {
         'top': top,
