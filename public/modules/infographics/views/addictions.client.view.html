@@ -5,12 +5,12 @@
             <h1>{{ addictionsData.name }}</h1>
         </div>
     </div>
-    <div class="row addictions">
-        <div class="col-xs-4 col-sm-3 col-md-2 addiction" data-ng-repeat="addiction in addictionsData.children track by $index">
+    <div class="col-xs-12 sol-sm-12 col-md-2 addictions">
+        <div class="col-xs-4 col-sm-3 col-md-12 addiction" data-ng-repeat="addiction in addictionsData.children track by $index">
             <button class="btn btn-block" data-ng-click="addNode(addiction)">{{ addiction.name }}</button>
         </div>
     </div>
-    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-10">
         <div class="col-xs-12">
             <div addictions="addictions" data-graph-data="d3AddictionsData" data-is-updated="d3IsUpdated"></div>
         </div>

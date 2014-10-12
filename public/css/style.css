@@ -5296,29 +5296,41 @@ button.close {
   margin-bottom: 1em;
   color: white; }
   .addiction:nth-of-type(1) button {
-    background-color: #EF4836; }
+    background-color: #EF4836;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(2) button {
-    background-color: #663399; }
+    background-color: #663399;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(3) button {
-    background-color: #913D88; }
+    background-color: #913D88;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(4) button {
-    background-color: #4183D7; }
+    background-color: #4183D7;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(5) button {
-    background-color: #336E7B; }
+    background-color: #336E7B;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(6) button {
-    background-color: #4ECDC4; }
+    background-color: #4ECDC4;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(7) button {
-    background-color: #87D37C; }
+    background-color: #87D37C;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(8) button {
-    background-color: #26A65B; }
+    background-color: #26A65B;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(9) button {
-    background-color: #F89406; }
+    background-color: #F89406;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(10) button {
-    background-color: #F5AB35; }
+    background-color: #F5AB35;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(11) button {
-    background-color: #6C7A89; }
+    background-color: #6C7A89;
+    padding: 0.5em 0; }
   .addiction:nth-of-type(12) button {
-    background-color: #95A5A6; }
+    background-color: #95A5A6;
+    padding: 0.5em 0; }
 
 .edit-panel {
   background-color: white;
