@@ -32,12 +32,22 @@ $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color
 }
 
 .edit-panel {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
+
   background-color: white;
-  border: 1px solid $gray;
+  height: 100%;
+  margin-left: 0;
+  left: 0;
   padding: 0.5em 1em;
   position: absolute;
+  top: $navbar-height;
   text-align: center;
-  @include translate(-50%, 0);
+  width: 300px;
+
+  &.ng-hide {
+    margin-left: -300px;
+  }
 
   h3 {
     margin-top: 0;

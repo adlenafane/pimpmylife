@@ -5333,15 +5333,19 @@ button.close {
     padding: 0.5em 0; }
 
 .edit-panel {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s;
   background-color: white;
-  border: 1px solid #555555;
+  height: 100%;
+  margin-left: 0;
+  left: 0;
   padding: 0.5em 1em;
   position: absolute;
+  top: 50px;
   text-align: center;
-  -webkit-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -o-transform: translate(-50%, 0);
-  transform: translate(-50%, 0); }
+  width: 300px; }
+  .edit-panel.ng-hide {
+    margin-left: -300px; }
   .edit-panel h3 {
     margin-top: 0;
     text-align: center; }

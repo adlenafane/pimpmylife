@@ -294,32 +294,15 @@ angular.module('infographics').controller('AddictionsController', [
           nodeId: $scope.nodeCount,
           packageName: addiction.name,
           placeholder: addiction.placeholder,
-          className: '',
-          top: '50%',
-          left: '50%'
+          className: ''
         };
       addiction.children.push(node);
       $scope.$broadcast('NODE_CLICKED', node);
       $scope.nodeCount++;
     };
     $scope.editNode = function (d) {
-      var top, left;
-      $scope.showPanel = true;
-      if (d.top) {
-        top = d.top;
-      } else {
-        top = d.y + 'px';
-      }
-      if (d.left) {
-        left = d.left;
-      } else {
-        left = d.x + 50 + 'px';
-      }
-      $scope.panelPosition = {
-        'top': top,
-        'left': left
-      };
       var parentIndex, currentIndex = 0;
+      $scope.showPanel = true;
       $scope.addictionsData.children.map(function (element, index) {
         if (element.name === d.packageName) {
           parentIndex = index;
