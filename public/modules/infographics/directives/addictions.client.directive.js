@@ -49,18 +49,19 @@ angular.module('infographics').directive('addictions', [
           $scope.$watch(function() {
             return angular.element($window)[0].innerWidth;
           }, function() {
-            $scope.render($scope.data);
+            $scope.render($scope.graphData);
           });
 
           $scope.$watch('isUpdated', function(newVals) {
             if (newVals) {
               $scope.isUpdated = false;
-              return $scope.render($scope.data);
+              return $scope.render($scope.graphData);
             }
             $scope.isUpdated = false;
           });
 
           $scope.render = function(data) {
+            if(!data) { return; }
             svg.selectAll('*').remove();
 
             var diameter = size,

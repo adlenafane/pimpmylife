@@ -1,16 +1,122 @@
 'use strict';
 
-angular.module('infographics').controller('AddictionsController',['$scope',
-  function($scope) {
+angular.module('infographics').controller('AddictionsController', [
+  '$scope',
+  '$http',
+  '$state',
+  '$stateParams',
+  function($scope, $http, $state, $stateParams) {
+
+    /** Server communication **/
+    if ($stateParams.id) {
+      $http.get('/api/infographics/' + $stateParams.id)
+        .success(function(data) {
+          $scope.addictionsData = data;
+        });
+    } else {
+      $scope.addictionsData = {
+        name: 'Addictions',
+        children: [
+          {
+            name: 'Alimentation',
+            placeholder: 'Ex: Bonbons',
+            children: [
+              {name: 'Nutella', size: 10, nodeId: -1},
+              {name: 'Granola', size: 15, nodeId: -2},
+              {name: 'Oreo', size: 37, nodeId: -3},
+              {name: 'Starbucks', size: 77, nodeId: -4}
+            ]
+          },
+          {
+            name: 'Alcool',
+            placeholder: 'Ex: Vodka',
+            children: []
+          },
+          {
+            name: 'Sommeil',
+            placeholder: 'Ex: Siestes',
+            children: []
+          },
+          {
+            name: 'Travail',
+            placeholder: 'Ex: Fignolage',
+            children: []
+          },
+          {
+            name: 'Technologie',
+            placeholder: 'Ex: Facebook',
+            children: []
+          },
+          {
+            name: 'Shopping',
+            placeholder: 'Ex: Zara',
+            children: []
+          },
+          {
+            name: 'Culture',
+            placeholder: 'Ex: Théâtre',
+            children: []
+          },
+          {
+            name: 'Sorties',
+            placeholder: 'Ex: Club',
+            children: []
+          },
+          {
+            name: 'Jeux',
+            placeholder: 'Ex: Poker',
+            children: []
+          },
+          {
+            name: 'Sport',
+            placeholder: 'Ex: Footing',
+            children: []
+          },
+          {
+            name: 'Sexe',
+            placeholder: 'Ex: Au réveil',
+            children: []
+          },
+          {
+            name: 'Drogue',
+            placeholder: 'Ex: Cigarettes',
+            children: []
+          }
+        ]
+      };
+    }
+
+    $scope.saveInfographics = function() {
+      /** Update existing infographics **/
+      if ($scope.addictionsData._id) {
+        $http.put('/api/infographics/' + $scope.addictionsData._id, $scope.addictionsData)
+          .success(function () {
+            $state.go('list');
+          })
+          .error(function(data) {
+            $scope.error = 'Error while saving. ' + data
+          });
+      } else {
+        $http.post('/api/infographics', $scope.addictionsData)
+          .success(function(data) {
+            $state.go('list');
+          })
+          .error(function(data) {
+            $scope.error = 'Error while saving. ' + data
+          });
+      }
+    };
+
+    /** D3.js Communication **/
+    $scope.nodeCount = 0;
+    $scope.panelPosition = {};
+
     $scope.$watch('addictionsData', function() {
       if($scope.addictionsData) {
         $scope.d3IsUpdated = true;
         $scope.d3AddictionsData = JSON.parse(JSON.stringify($scope.addictionsData));
       }
     }, true);
-
-    $scope.nodeCount = 0;
-    $scope.panelPosition = {};
 
     $scope.addNode = function(addiction) {
       var node = {
@@ -70,76 +176,5 @@ angular.module('infographics').controller('AddictionsController',['$scope',
         $scope.addNode(addiction);
       }
     });
-
-    $scope.addictionsData = {
-      name: 'Addictions',
-      children: [
-        {
-          name: 'Alimentation',
-          placeholder: 'Ex: Bonbons',
-          children: [
-            {name: 'Nutella', size: 10, nodeId: -1},
-            {name: 'Granola', size: 15, nodeId: -2},
-            {name: 'Oreo', size: 37, nodeId: -3},
-            {name: 'Starbucks', size: 77, nodeId: -4}
-          ]
-        },
-        {
-          name: 'Alcool',
-          placeholder: 'Ex: Vodka',
-          children: []
-        },
-        {
-          name: 'Sommeil',
-          placeholder: 'Ex: Siestes',
-          children: []
-        },
-        {
-          name: 'Travail',
-          placeholder: 'Ex: Fignolage',
-          children: []
-        },
-        {
-          name: 'Technologie',
-          placeholder: 'Ex: Facebook',
-          children: []
-        },
-        {
-          name: 'Shopping',
-          placeholder: 'Ex: Zara',
-          children: []
-        },
-        {
-          name: 'Culture',
-          placeholder: 'Ex: Théâtre',
-          children: []
-        },
-        {
-          name: 'Sorties',
-          placeholder: 'Ex: Club',
-          children: []
-        },
-        {
-          name: 'Jeux',
-          placeholder: 'Ex: Poker',
-          children: []
-        },
-        {
-          name: 'Sport',
-          placeholder: 'Ex: Footing',
-          children: []
-        },
-        {
-          name: 'Sexe',
-          placeholder: 'Ex: Au réveil',
-          children: []
-        },
-        {
-          name: 'Drogue',
-          placeholder: 'Ex: Cigarettes',
-          children: []
-        }
-      ]
-    };
   }
 ]);
