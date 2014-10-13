@@ -26,7 +26,7 @@ var InfographicsSchema = new Schema({
   displayName: {
     type: String,
     trim: true,
-    default: 'Name not defined'
+    default: 'No name defined'
   },
   lastModification: {
     type: Date,
