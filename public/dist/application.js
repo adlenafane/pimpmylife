@@ -268,6 +268,9 @@ angular.module('infographics').config([
       url: '/infographics',
       templateUrl: 'modules/infographics/views/list.client.view.html'
     }).state('addictions', {
+      url: '/infographics/addictions/:id',
+      templateUrl: 'modules/infographics/views/addictions.client.view.html'
+    }).state('addictionsNew', {
       url: '/infographics/addictions',
       templateUrl: 'modules/infographics/views/addictions.client.view.html'
     }).state('get', {
@@ -278,15 +281,132 @@ angular.module('infographics').config([
 ]);'use strict';
 angular.module('infographics').controller('AddictionsController', [
   '$scope',
-  function ($scope) {
+  '$http',
+  '$state',
+  '$stateParams',
+  'Authentication',
+  function ($scope, $http, $state, $stateParams, Authentication) {
+    $scope.authentication = Authentication;
+    if (!$scope.authentication.user)
+      $state.go('signin');
+    /** Server communication **/
+    if ($stateParams.id) {
+      $http.get('/api/infographics/' + $stateParams.id).success(function (data) {
+        $scope.addictionsData = data;
+      });
+    } else {
+      $scope.addictionsData = {
+        name: 'Addictions',
+        children: [
+          {
+            name: 'Alimentation',
+            placeholder: 'Ex: Bonbons',
+            children: [
+              {
+                name: 'Nutella',
+                size: 10,
+                nodeId: -1
+              },
+              {
+                name: 'Granola',
+                size: 15,
+                nodeId: -2
+              },
+              {
+                name: 'Oreo',
+                size: 37,
+                nodeId: -3
+              },
+              {
+                name: 'Starbucks',
+                size: 77,
+                nodeId: -4
+              }
+            ]
+          },
+          {
+            name: 'Alcool',
+            placeholder: 'Ex: Vodka',
+            children: []
+          },
+          {
+            name: 'Sommeil',
+            placeholder: 'Ex: Siestes',
+            children: []
+          },
+          {
+            name: 'Travail',
+            placeholder: 'Ex: Fignolage',
+            children: []
+          },
+          {
+            name: 'Technologie',
+            placeholder: 'Ex: Facebook',
+            children: []
+          },
+          {
+            name: 'Shopping',
+            placeholder: 'Ex: Zara',
+            children: []
+          },
+          {
+            name: 'Culture',
+            placeholder: 'Ex: Th\xe9\xe2tre',
+            children: []
+          },
+          {
+            name: 'Sorties',
+            placeholder: 'Ex: Club',
+            children: []
+          },
+          {
+            name: 'Jeux',
+            placeholder: 'Ex: Poker',
+            children: []
+          },
+          {
+            name: 'Sport',
+            placeholder: 'Ex: Footing',
+            children: []
+          },
+          {
+            name: 'Sexe',
+            placeholder: 'Ex: Au r\xe9veil',
+            children: []
+          },
+          {
+            name: 'Drogue',
+            placeholder: 'Ex: Cigarettes',
+            children: []
+          }
+        ]
+      };
+    }
+    $scope.saveInfographics = function () {
+      /** Update existing infographics **/
+      if ($scope.addictionsData._id) {
+        $http.put('/api/infographics/' + $scope.addictionsData._id, $scope.addictionsData).success(function () {
+          $state.go('list');
+        }).error(function (data) {
+          $scope.error = 'Error while saving. ' + data;
+        });
+      } else {
+        $http.post('/api/infographics', $scope.addictionsData).success(function (data) {
+          $state.go('list');
+        }).error(function (data) {
+          $scope.error = 'Error while saving. ' + data;
+        });
+      }
+    };
+    /** D3.js Communication **/
+    $scope.nodeCount = 0;
+    $scope.panelPosition = {};
     $scope.$watch('addictionsData', function () {
       if ($scope.addictionsData) {
         $scope.d3IsUpdated = true;
         $scope.d3AddictionsData = JSON.parse(JSON.stringify($scope.addictionsData));
       }
     }, true);
-    $scope.nodeCount = 0;
-    $scope.panelPosition = {};
     $scope.addNode = function (addiction) {
       var node = {
           name: '',
@@ -339,92 +459,6 @@ angular.module('infographics').controller('AddictionsController', [
         $scope.addNode(addiction);
       }
     });
-    $scope.addictionsData = {
-      name: 'Addictions',
-      children: [
-        {
-          name: 'Alimentation',
-          placeholder: 'Ex: Bonbons',
-          children: [
-            {
-              name: 'Nutella',
-              size: 10,
-              nodeId: -1
-            },
-            {
-              name: 'Granola',
-              size: 15,
-              nodeId: -2
-            },
-            {
-              name: 'Oreo',
-              size: 37,
-              nodeId: -3
-            },
-            {
-              name: 'Starbucks',
-              size: 77,
-              nodeId: -4
-            }
-          ]
-        },
-        {
-          name: 'Alcool',
-          placeholder: 'Ex: Vodka',
-          children: []
-        },
-        {
-          name: 'Sommeil',
-          placeholder: 'Ex: Siestes',
-          children: []
-        },
-        {
-          name: 'Travail',
-          placeholder: 'Ex: Fignolage',
-          children: []
-        },
-        {
-          name: 'Technologie',
-          placeholder: 'Ex: Facebook',
-          children: []
-        },
-        {
-          name: 'Shopping',
-          placeholder: 'Ex: Zara',
-          children: []
-        },
-        {
-          name: 'Culture',
-          placeholder: 'Ex: Th\xe9\xe2tre',
-          children: []
-        },
-        {
-          name: 'Sorties',
-          placeholder: 'Ex: Club',
-          children: []
-        },
-        {
-          name: 'Jeux',
-          placeholder: 'Ex: Poker',
-          children: []
-        },
-        {
-          name: 'Sport',
-          placeholder: 'Ex: Footing',
-          children: []
-        },
-        {
-          name: 'Sexe',
-          placeholder: 'Ex: Au r\xe9veil',
-          children: []
-        },
-        {
-          name: 'Drogue',
-          placeholder: 'Ex: Cigarettes',
-          children: []
-        }
-      ]
-    };
   }
 ]);'use strict';
 angular.module('infographics').controller('InfographicsController', [
@@ -573,16 +607,19 @@ angular.module('infographics').directive('addictions', [
           $scope.$watch(function () {
             return angular.element($window)[0].innerWidth;
           }, function () {
-            $scope.render($scope.data);
+            $scope.render($scope.graphData);
           });
           $scope.$watch('isUpdated', function (newVals) {
             if (newVals) {
               $scope.isUpdated = false;
-              return $scope.render($scope.data);
+              return $scope.render($scope.graphData);
             }
             $scope.isUpdated = false;
           });
           $scope.render = function (data) {
+            if (!data) {
+              return;
+            }
             svg.selectAll('*').remove();
             var diameter = size, format = d3.format(',d'), color;
             color = function (addiction) {

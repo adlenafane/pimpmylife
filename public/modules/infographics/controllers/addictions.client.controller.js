@@ -97,7 +97,7 @@ angular.module('infographics').controller('AddictionsController', [
             $state.go('list');
           })
           .error(function(data) {
-            $scope.error = 'Error while saving. ' + data
+            $scope.error = 'Error while saving. ' + data;
           });
       } else {
         $http.post('/api/infographics', $scope.addictionsData)
@@ -105,7 +105,7 @@ angular.module('infographics').controller('AddictionsController', [
             $state.go('list');
           })
           .error(function(data) {
-            $scope.error = 'Error while saving. ' + data
+            $scope.error = 'Error while saving. ' + data;
           });
       }
     };
