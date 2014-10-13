@@ -8,6 +8,10 @@ angular.module('infographics').config(['$stateProvider',
 			templateUrl: 'modules/infographics/views/list.client.view.html'
 		})
     .state('addictions', {
+			url: '/infographics/addictions/:id',
+			templateUrl: 'modules/infographics/views/addictions.client.view.html'
+		})
+    .state('addictionsNew', {
 			url: '/infographics/addictions',
 			templateUrl: 'modules/infographics/views/addictions.client.view.html'
 		})
