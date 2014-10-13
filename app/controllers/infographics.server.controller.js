@@ -55,17 +55,16 @@ exports.update = function (req, res, next) {
   // Add missing user fields
   infographics.lastModification = Date.now();
   infographics.userId = req.user._id;
-  delete infographics._id;
 
-  Infographics.findByIdAndUpdate(req.params.infoId, infographics.toObject(), function (err, infographics) {
-      if (err) {
-        return res.status(500).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      }
+  infographics.save(function(err) {
+    if (err) {
+      return res.status(400).send({
+        message: errorHandler.getErrorMessage(err)
+      });
+    } else {
       res.jsonp(infographics);
     }
-  );
+  });
 };
 
 exports.remove = function (req, res, next) {
