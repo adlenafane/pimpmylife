@@ -3,8 +3,7 @@
 
     <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8" data-ng-repeat="infograph in infographics track by $index">
         <a class="col-xs-10" data-ng-href="#!/infographics/{{ infograph.name.toLowerCase() }}/{{ infograph._id }}">{{ infograph.displayName }}</a>
-        <span class="glyphicon glyphicon-trash col-xs-1" data-ng-click="removeInfographics(infograph)"></span>
-        <span class="glyphicon glyphicon-pencil col-xs-1" data-ng-click="toggleEditForm($index)"></span>
+        <span class="glyphicon glyphicon-trash col-xs-2" data-ng-click="removeInfographics(infograph)"></span>
     </div>
 
     <div class="col-xs-offset-2 col-xs-8 col-md-offset-2 col-md-8">
