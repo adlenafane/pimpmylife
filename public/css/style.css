@@ -5339,15 +5339,17 @@ button.close {
     padding: 0.5em 0; }
 
 .edit-panel {
-  background-color: white;
-  border: 1px solid #555555;
-  padding: 0.5em 1em;
-  position: absolute;
-  text-align: center;
   -webkit-transform: translate(-50%, 0);
   -ms-transform: translate(-50%, 0);
   -o-transform: translate(-50%, 0);
-  transform: translate(-50%, 0); }
+  transform: translate(-50%, 0);
+  background-color: white;
+  padding: 1em 2em;
+  position: absolute;
+  text-align: center;
+  min-width: 300px;
+  width: 30%;
+  max-width: 400px; }
   .edit-panel h3 {
     margin-top: 0;
     text-align: center; }
@@ -5362,6 +5364,8 @@ button.close {
 
 [addictions] {
   text-align: center; }
+  [addictions] circle {
+    cursor: pointer; }
 
 .content {
   margin-top: 50px; }
