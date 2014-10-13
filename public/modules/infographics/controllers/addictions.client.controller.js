@@ -5,7 +5,10 @@ angular.module('infographics').controller('AddictionsController', [
   '$http',
   '$state',
   '$stateParams',
-  function($scope, $http, $state, $stateParams) {
+  'Authentication',
+  function($scope, $http, $state, $stateParams, Authentication) {
+    $scope.authentication = Authentication;
+    if (!$scope.authentication.user) $state.go('signin');
 
     /** Server communication **/
     if ($stateParams.id) {
