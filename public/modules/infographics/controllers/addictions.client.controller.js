@@ -19,9 +19,7 @@ angular.module('infographics').controller('AddictionsController',['$scope',
         nodeId: $scope.nodeCount,
         packageName: addiction.name,
         placeholder: addiction.placeholder,
-        className: '',
-        top: '50%',
-        left: '50%'
+        className: ''
       };
       addiction.children.push(node);
       $scope.$broadcast('NODE_CLICKED', node);
@@ -29,18 +27,9 @@ angular.module('infographics').controller('AddictionsController',['$scope',
     };
 
     $scope.editNode = function(d) {
-      var top, left;
+      var top = '20%',
+        left = '50%';
       $scope.showPanel = true;
-      if (d.top) {
-        top = d.top;
-      } else {
-        top = d.y + 'px';
-      }
-      if (d.left) {
-        left = d.left;
-      } else {
-        left = (d.x + 50) + 'px';
-      }
 
       $scope.panelPosition = {
         'top': top,

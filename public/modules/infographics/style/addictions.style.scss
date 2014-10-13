@@ -32,12 +32,14 @@ $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color
 }
 
 .edit-panel {
+  @include translate(-50%, 0);
   background-color: white;
-  border: 1px solid $gray;
-  padding: 0.5em 1em;
+  padding: 1em 2em;
   position: absolute;
   text-align: center;
-  @include translate(-50%, 0);
+  min-width: 300px;
+  width: 30%;
+  max-width: 400px;
 
   h3 {
     margin-top: 0;
@@ -56,4 +58,8 @@ $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color
 
 [addictions] {
   text-align: center;
+
+  circle {
+    cursor: pointer;
+  }
 }
