@@ -57,7 +57,7 @@ exports.update = function (req, res, next) {
   infographics.userId = req.user._id;
   delete infographics._id;
 
-  Infographics.findByIdAndUpdate(req.params.infoId, infographics.toObject(), function (err, infographics) {
+  Infographics.findByIdAndUpdate(req.params.infoId, infographics.toObject(), {}, function (err, infographics) {
       if (err) {
         return res.status(500).send({
           message: errorHandler.getErrorMessage(err)
