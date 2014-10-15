@@ -6,7 +6,8 @@ angular.module('infographics').controller('AddictionsController', [
   '$state',
   '$stateParams',
   'Authentication',
-  function($scope, $http, $state, $stateParams, Authentication) {
+  'Infographics',
+  function($scope, $http, $state, $stateParams, Authentication, Infographics) {
     $scope.authentication = Authentication;
     if (!$scope.authentication.user) $state.go('signin');
 
@@ -92,13 +93,13 @@ angular.module('infographics').controller('AddictionsController', [
     $scope.saveInfographics = function() {
       /** Update existing infographics **/
       if ($scope.addictionsData._id) {
-        $http.put('/api/infographics/' + $scope.addictionsData._id, $scope.addictionsData)
-          .success(function () {
-            $state.go('list');
-          })
-          .error(function(data) {
-            $scope.error = 'Error while saving. ' + data;
-          });
+        var infographics = new Infographics($scope.addictionsData);
+
+        infographics.$update(function() {
+          $state.go('list');
+        }, function(errorResponse) {
+          $scope.error = errorResponse.data.message;
+        });
       } else {
         $http.post('/api/infographics', $scope.addictionsData)
           .success(function(data) {

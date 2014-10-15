@@ -52,20 +52,29 @@ exports.get = function (req, res, next) {
 
 exports.update = function (req, res, next) {
   var infographics = new Infographics(req.body);
+
   // Add missing user fields
   infographics.lastModification = Date.now();
   infographics.userId = req.user._id;
-  delete infographics._id;
 
-  Infographics.findByIdAndUpdate(req.params.infoId, infographics.toObject(), {}, function (err, infographics) {
-      if (err) {
-        return res.status(500).send({
-          message: errorHandler.getErrorMessage(err)
-        });
-      }
-      res.jsonp(infographics);
+  // Dirty hack, `save` should be used but for some reason it won't work because of:
+  // InsertDocument::caused by::11000 E11000 duplicate key error index
+  Infographics.findByIdAndRemove(req.params.infoId, function(err) {
+    if (err) {
+      return res.status(500).send({
+        message: errorHandler.getErrorMessage(err)
+      });
     }
-  );
+    infographics.save(function (err, infographics) {
+        if (err) {
+          return res.status(500).send({
+            message: errorHandler.getErrorMessage(err)
+          });
+        }
+        res.jsonp(infographics);
+      }
+    );
+  });
 };
 
 exports.remove = function (req, res, next) {
