@@ -132,14 +132,15 @@ angular.module('infographics').controller('AddictionsController', [
         className: ''
       };
       addiction.children.push(node);
-      $scope.$broadcast('NODE_CLICKED', node);
+      $scope.$broadcast('NODE_CLICKED', node, 'NEW');
       $scope.nodeCount++;
     };
 
-    $scope.editNode = function(d) {
+    $scope.editNode = function(d, mode) {
       var top = '20%',
         left = '50%';
       $scope.showPanel = true;
+      $scope.mode = mode;
 
       $scope.panelPosition = {
         'top': top,
@@ -167,9 +168,19 @@ angular.module('infographics').controller('AddictionsController', [
       }
     };
 
-    $scope.$on('NODE_CLICKED', function (event, d) {
-      $scope.editNode(d);
+    $scope.$on('NODE_CLICKED', function (event, d, mode) {
+      if(mode !== 'NEW') {
+        mode = 'EDIT'
+      }
+      $scope.editNode(d, mode);
     });
+
+    $scope.leavePanel = function() {
+      if ($scope.mode === 'NEW' && !$scope.currentItem.name) {
+        $scope.deleteCurrentNode();
+      }
+      $scope.showPanel = false;
+    }
 
     $scope.$on('APPEND_NODE_TO_PACKAGE', function (event, packageName) {
       var addiction = $scope.addictionsData.children.filter(function (addiction) {

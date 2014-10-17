@@ -27,13 +27,13 @@
             <div addictions="addictions" data-graph-data="d3AddictionsData" data-is-updated="d3IsUpdated"></div>
         </div>
     </div>
-    <div class="overlay" data-ng-show="showPanel" data-ng-click="showPanel = false"></div>
+    <div class="overlay" data-ng-show="showPanel" data-ng-click="leavePanel();"></div>
     <div class="edit-panel" data-ng-show="showPanel" data-ng-style="panelPosition">
         <small>add an addiction to</small>
         <h3>{{ currentItem.addiction }}</h3>
         <input class="form-control" data-ng-model="currentItem.name" placeholder="{{ currentItem.placeholder }}" data-ng-if="showPanel" focus="focus">
         <input type="number" class="form-control" data-ng-model="currentItem.size" min="0">
-        <button class="btn btn-block btn-default form-control" data-ng-click="deleteCurrentNode()">
+        <button class="btn btn-block btn-default form-control" data-ng-click="deleteCurrentNode()" ng-if="mode === 'EDIT'">
             <i class="glyphicon glyphicon-trash"></i>
         </button>
     </div>
