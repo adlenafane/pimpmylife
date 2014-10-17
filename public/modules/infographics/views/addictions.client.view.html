@@ -36,10 +36,16 @@
             Taille de la bulle
             <input type=range min=1 max=10000 data-ng-model="currentItem.size" step="1">
         </label>
-        <button class="btn btn-block btn-success form-control edit-panel-item" data-ng-click="leavePanel();">
+        <button
+            class="btn btn-block btn-success form-control edit-panel-item"
+            data-ng-click="leavePanel();"
+            data-ng-disabled="!currentItem.name">
             <i class="glyphicon glyphicon-ok"></i>
         </button>
-        <button class="btn btn-block btn-default form-control edit-panel-item" data-ng-click="deleteCurrentNode()" ng-if="editMode">
+        <button
+            class="btn btn-block btn-default form-control edit-panel-item"
+            data-ng-click="deleteCurrentNode()"
+            data-ng-if="editMode">
             <i class="glyphicon glyphicon-trash"></i>
         </button>
     </div>
