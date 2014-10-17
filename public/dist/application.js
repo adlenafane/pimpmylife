@@ -302,28 +302,11 @@ angular.module('infographics').controller('AddictionsController', [
           {
             name: 'Alimentation',
             placeholder: 'Ex: Bonbons',
-            children: [
-              {
+            children: [{
                 name: 'Nutella',
-                size: 10,
+                size: 5000,
                 nodeId: -1
-              },
-              {
-                name: 'Granola',
-                size: 15,
-                nodeId: -2
-              },
-              {
-                name: 'Oreo',
-                size: 37,
-                nodeId: -3
-              },
-              {
-                name: 'Starbucks',
-                size: 77,
-                nodeId: -4
-              }
-            ]
+              }]
           },
           {
             name: 'Alcool',
@@ -333,7 +316,11 @@ angular.module('infographics').controller('AddictionsController', [
           {
             name: 'Sommeil',
             placeholder: 'Ex: Siestes',
-            children: []
+            children: [{
+                name: 'Siestes',
+                size: 777,
+                nodeId: -4
+              }]
           },
           {
             name: 'Travail',
@@ -348,7 +335,11 @@ angular.module('infographics').controller('AddictionsController', [
           {
             name: 'Shopping',
             placeholder: 'Ex: Zara',
-            children: []
+            children: [{
+                name: 'Zara',
+                size: 1500,
+                nodeId: -2
+              }]
           },
           {
             name: 'Culture',
@@ -368,7 +359,11 @@ angular.module('infographics').controller('AddictionsController', [
           {
             name: 'Sport',
             placeholder: 'Ex: Footing',
-            children: []
+            children: [{
+                name: 'Footing',
+                size: 1337,
+                nodeId: -3
+              }]
           },
           {
             name: 'Sexe',
@@ -419,7 +414,6 @@ angular.module('infographics').controller('AddictionsController', [
           className: ''
         };
       addiction.children.push(node);
-      $scope.$broadcast('NODE_CLICKED', node, 'NEW');
       $scope.nodeCount++;
     };
     $scope.editNode = function (d, mode) {

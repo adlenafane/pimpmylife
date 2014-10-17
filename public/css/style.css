@@ -5295,9 +5295,6 @@ button.close {
 @media print {
   .hidden-print {
     display: none !important; } }
-.form-control + .form-control {
-  margin-top: 0.5em; }
-
 .addiction {
   color: #ffffff;
   margin-bottom: 1em; }
@@ -5426,6 +5423,10 @@ button.close {
   .edit-panel h3 {
     margin-top: 0;
     text-align: center; }
+  .edit-panel .size-range {
+    width: 100%; }
+  .edit-panel .edit-panel-item + .edit-panel-item {
+    margin-top: 0.5em; }
 
 .overlay {
   position: fixed;

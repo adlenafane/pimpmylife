@@ -31,9 +31,12 @@
     <div class="edit-panel" data-ng-show="showPanel" data-ng-style="panelPosition">
         <small>add an addiction to</small>
         <h3>{{ currentItem.addiction }}</h3>
-        <input class="form-control" data-ng-model="currentItem.name" placeholder="{{ currentItem.placeholder }}" data-ng-if="showPanel" focus="focus">
-        <input type="number" class="form-control" data-ng-model="currentItem.size" min="0">
-        <button class="btn btn-block btn-default form-control" data-ng-click="deleteCurrentNode()" ng-if="editMode">
+        <input class="form-control edit-panel-item" data-ng-model="currentItem.name" placeholder="{{ currentItem.placeholder }}" data-ng-if="showPanel" focus="focus">
+        <label class="edit-panel-item size-range">
+            Taille de la bulle
+            <input type=range min=1 max=10000 data-ng-model="currentItem.size" step="1">
+        </label>
+        <button class="btn btn-block btn-default form-control edit-panel-item" data-ng-click="deleteCurrentNode()" ng-if="editMode">
             <i class="glyphicon glyphicon-trash"></i>
         </button>
     </div>

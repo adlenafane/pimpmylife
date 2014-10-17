@@ -14,10 +14,6 @@ $color-12: #95A5A6;
 
 $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color-7 $color-8 $color-9 $color-10 $color-11 $color-12;
 
-.form-control + .form-control {
-  margin-top: 0.5em;
-}
-
 .addiction {
   color: $white;
   margin-bottom: 1em;
@@ -54,6 +50,14 @@ $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color
   h3 {
     margin-top: 0;
     text-align: center;
+  }
+
+  .size-range {
+    width: 100%;
+  }
+
+  .edit-panel-item + .edit-panel-item {
+    margin-top: 0.5em;
   }
 }
 
