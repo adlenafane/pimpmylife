@@ -5299,68 +5299,116 @@ button.close {
   margin-top: 0.5em; }
 
 .addiction {
-  color: white;
+  color: #ffffff;
   margin-bottom: 1em; }
   .addiction:nth-of-type(1) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #EF4836;
     color: #EF4836;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(1) button:hover, .addiction:nth-of-type(1) button:active {
+      background-color: #EF4836;
+      color: #ffffff; }
   .addiction:nth-of-type(2) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #663399;
     color: #663399;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(2) button:hover, .addiction:nth-of-type(2) button:active {
+      background-color: #663399;
+      color: #ffffff; }
   .addiction:nth-of-type(3) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #913D88;
     color: #913D88;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(3) button:hover, .addiction:nth-of-type(3) button:active {
+      background-color: #913D88;
+      color: #ffffff; }
   .addiction:nth-of-type(4) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #4183D7;
     color: #4183D7;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(4) button:hover, .addiction:nth-of-type(4) button:active {
+      background-color: #4183D7;
+      color: #ffffff; }
   .addiction:nth-of-type(5) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #336E7B;
     color: #336E7B;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(5) button:hover, .addiction:nth-of-type(5) button:active {
+      background-color: #336E7B;
+      color: #ffffff; }
   .addiction:nth-of-type(6) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #4ECDC4;
     color: #4ECDC4;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(6) button:hover, .addiction:nth-of-type(6) button:active {
+      background-color: #4ECDC4;
+      color: #ffffff; }
   .addiction:nth-of-type(7) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #87D37C;
     color: #87D37C;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(7) button:hover, .addiction:nth-of-type(7) button:active {
+      background-color: #87D37C;
+      color: #ffffff; }
   .addiction:nth-of-type(8) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #26A65B;
     color: #26A65B;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(8) button:hover, .addiction:nth-of-type(8) button:active {
+      background-color: #26A65B;
+      color: #ffffff; }
   .addiction:nth-of-type(9) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #F89406;
     color: #F89406;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(9) button:hover, .addiction:nth-of-type(9) button:active {
+      background-color: #F89406;
+      color: #ffffff; }
   .addiction:nth-of-type(10) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #F5AB35;
     color: #F5AB35;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(10) button:hover, .addiction:nth-of-type(10) button:active {
+      background-color: #F5AB35;
+      color: #ffffff; }
   .addiction:nth-of-type(11) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #6C7A89;
     color: #6C7A89;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(11) button:hover, .addiction:nth-of-type(11) button:active {
+      background-color: #6C7A89;
+      color: #ffffff; }
   .addiction:nth-of-type(12) button {
-    background-color: white;
+    transition: background-color 0.3s ease-in-out;
+    background-color: #ffffff;
     border: 2px solid #95A5A6;
     color: #95A5A6;
     padding: 0.5em 0; }
+    .addiction:nth-of-type(12) button:hover, .addiction:nth-of-type(12) button:active {
+      background-color: #95A5A6;
+      color: #ffffff; }
 
 .edit-panel {
   -webkit-transform: translate(-50%, 0);
