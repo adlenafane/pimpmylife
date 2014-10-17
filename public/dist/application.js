@@ -414,6 +414,7 @@ angular.module('infographics').controller('AddictionsController', [
           className: ''
         };
       addiction.children.push(node);
+      $scope.$broadcast('NODE_CLICKED', node, 'NEW');
       $scope.nodeCount++;
     };
     $scope.editNode = function (d, mode) {
