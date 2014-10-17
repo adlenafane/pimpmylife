@@ -11,6 +11,7 @@ angular.module('infographics').directive('addictions', [
         graphData: '='
       },
       link: function postLink($scope, $element, $attrs) {
+        var d3 = $window.d3;
         // Returns a flattened hierarchy containing all leaf nodes under the root.
         function classes(root) {
           var classesArray= [];
@@ -28,7 +29,7 @@ angular.module('infographics').directive('addictions', [
 
           recurse(null, root);
           return {children: classesArray};
-        };
+        }
 
         var margin = parseInt($attrs.margin) || 0;
 

@@ -169,7 +169,7 @@ angular.module('infographics').controller('AddictionsController', [
     };
 
     $scope.$on('NODE_CLICKED', function (event, d, mode) {
-      $scope.editMode = mode !== 'NEW'
+      $scope.editMode = mode !== 'NEW';
       $scope.editNode(d, mode);
     });
 
@@ -178,7 +178,7 @@ angular.module('infographics').controller('AddictionsController', [
         $scope.deleteCurrentNode();
       }
       $scope.showPanel = false;
-    }
+    };
 
     $scope.$on('APPEND_NODE_TO_PACKAGE', function (event, packageName) {
       var addiction = $scope.addictionsData.children.filter(function (addiction) {

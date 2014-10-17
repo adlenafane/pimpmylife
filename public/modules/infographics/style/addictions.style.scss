@@ -18,13 +18,15 @@ $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color
 }
 
 .addiction {
-  margin-bottom: 1em;
   color: white;
+  margin-bottom: 1em;
 
   @for $i from 1 through length($addictions-colors) {
     &:nth-of-type(#{$i}) {
       button {
-        background-color: nth($addictions-colors, $i);
+        background-color: white;
+        border: 2px solid nth($addictions-colors, $i);
+        color: nth($addictions-colors, $i);
         padding: 0.5em 0;
       }
     }
@@ -35,8 +37,9 @@ $addictions-colors: $color-1 $color-2 $color-3 $color-4 $color-5 $color-6 $color
   @include translate(-50%, 0);
   background-color: white;
   padding: 1em 2em;
-  position: absolute;
+  position: fixed;
   text-align: center;
+  top: 15%;
   min-width: 300px;
   width: 30%;
   max-width: 400px;
