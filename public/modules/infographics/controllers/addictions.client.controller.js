@@ -139,8 +139,8 @@ angular.module('infographics').controller('AddictionsController', [
     $scope.editNode = function(d, mode) {
       var top = '20%',
         left = '50%';
-      $scope.showPanel = true;
       $scope.mode = mode;
+      $scope.showPanel = true;
 
       $scope.panelPosition = {
         'top': top,
@@ -169,9 +169,7 @@ angular.module('infographics').controller('AddictionsController', [
     };
 
     $scope.$on('NODE_CLICKED', function (event, d, mode) {
-      if(mode !== 'NEW') {
-        mode = 'EDIT'
-      }
+      $scope.editMode = mode !== 'NEW'
       $scope.editNode(d, mode);
     });
 

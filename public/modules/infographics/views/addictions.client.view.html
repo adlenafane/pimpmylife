@@ -33,7 +33,7 @@
         <h3>{{ currentItem.addiction }}</h3>
         <input class="form-control" data-ng-model="currentItem.name" placeholder="{{ currentItem.placeholder }}" data-ng-if="showPanel" focus="focus">
         <input type="number" class="form-control" data-ng-model="currentItem.size" min="0">
-        <button class="btn btn-block btn-default form-control" data-ng-click="deleteCurrentNode()" ng-if="mode === 'EDIT'">
+        <button class="btn btn-block btn-default form-control" data-ng-click="deleteCurrentNode()" ng-if="editMode">
             <i class="glyphicon glyphicon-trash"></i>
         </button>
     </div>
