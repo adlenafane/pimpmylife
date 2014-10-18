@@ -2,8 +2,7 @@
 
 angular.module('infographics').directive('addictions', [
   '$window',
-  'd3Service',
-  function($window, d3Service) {
+  function($window) {
     return {
       restrict: 'EA',
       scope: {
@@ -65,27 +64,7 @@ angular.module('infographics').directive('addictions', [
           svg.selectAll('*').remove();
 
           var diameter = size,
-            format = d3.format(',d'),
-            color;
-
-          color = function(addiction) {
-            var colors = {
-              Alimentation: '#EF4836',
-              Alcool: '#663399',
-              Sommeil: '#913D88',
-              Travail: '#4183D7',
-              Technologie: '#336E7B',
-              Shopping: '#4ECDC4',
-              Culture: '#87D37C',
-              Sorties: '#26A65B',
-              Jeux: '#F89406',
-              Sport: '#F5AB35',
-              Sexe: '#6C7A89',
-              Drogue: '#95A5A6'
-            };
-
-            return colors[addiction];
-          };
+            format = d3.format(',d');
 
           var bubble = d3.layout.pack()
             .sort(null)
@@ -104,7 +83,7 @@ angular.module('infographics').directive('addictions', [
 
           node.append('circle')
             .attr('r', function(d) { return d.r; })
-            .style('fill', function(d) { return color(d.packageName); });
+            .attr('class', function(d) { return d.packageName.toLowerCase(); });
 
           node.append('text')
             .attr('dy', '.3em')
