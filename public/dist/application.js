@@ -401,7 +401,7 @@ angular.module('infographics').controller('AddictionsController', [
     $scope.$watch('addictionsData', function () {
       if ($scope.addictionsData) {
         $scope.d3IsUpdated = true;
-        $scope.d3AddictionsData = JSON.parse(JSON.stringify($scope.addictionsData));
+        $scope.d3AddictionsData = angular.copy($scope.addictionsData);
       }
     }, true);
     $scope.addNode = function (addiction) {
