@@ -161,6 +161,9 @@ angular.module('infographics').controller('AddictionsController', [
       $scope.currentItem = $scope.addictionsData.children[parentIndex].children[currentIndex];
       $scope.currentItem.addiction = $scope.addictionsData.children[parentIndex].name;
 
+      // Save previous state of item
+      $scope.previousItem = angular.copy($scope.currentItem);
+
       $scope.deleteCurrentNode = function() {
         $scope.addictionsData.children[parentIndex].children.splice(currentIndex, 1);
         $scope.showPanel = false;
@@ -176,10 +179,18 @@ angular.module('infographics').controller('AddictionsController', [
       $scope.editNode(d, mode);
     });
 
+    $scope.savePanel = function() {
+      $scope.showPanel = false;
+    };
+
     $scope.leavePanel = function() {
-      if ($scope.mode === 'NEW' && !$scope.currentItem.name) {
+      if ($scope.mode === 'NEW') {
         $scope.deleteCurrentNode();
+      } else {
+        $scope.currentItem.name = $scope.previousItem.name;
+        $scope.currentItem.size = $scope.previousItem.size;
       }
+
       $scope.showPanel = false;
     };
 
