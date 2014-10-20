@@ -5420,6 +5420,12 @@ button.close {
   min-width: 300px;
   width: 30%;
   max-width: 400px; }
+  .edit-panel .icon-remove {
+    position: fixed;
+    right: 0.5em;
+    top: 0.5em;
+    cursor: pointer;
+    font-size: 1.5em; }
   .edit-panel h3 {
     margin-top: 0;
     text-align: center; }
@@ -5440,6 +5446,30 @@ button.close {
   text-align: center; }
   [addictions] circle {
     cursor: pointer; }
+    [addictions] circle.alimentation {
+      fill: #EF4836; }
+    [addictions] circle.alcool {
+      fill: #663399; }
+    [addictions] circle.sommeil {
+      fill: #913D88; }
+    [addictions] circle.travail {
+      fill: #4183D7; }
+    [addictions] circle.technologie {
+      fill: #336E7B; }
+    [addictions] circle.shopping {
+      fill: #4ECDC4; }
+    [addictions] circle.culture {
+      fill: #87D37C; }
+    [addictions] circle.sorties {
+      fill: #26A65B; }
+    [addictions] circle.jeux {
+      fill: #F89406; }
+    [addictions] circle.sport {
+      fill: #F5AB35; }
+    [addictions] circle.sexe {
+      fill: #6C7A89; }
+    [addictions] circle.drogue {
+      fill: #95A5A6; }
 
 .content {
   margin-top: 50px; }
