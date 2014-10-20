@@ -29,6 +29,9 @@
     </div>
     <div class="overlay" data-ng-show="showPanel" data-ng-click="leavePanel();"></div>
     <div class="edit-panel" data-ng-show="showPanel" data-ng-style="panelPosition">
+        <div class="icon-remove" data-ng-click="leavePanel();">
+            <i class="glyphicon glyphicon-remove"></i>
+        </div>
         <small>add an addiction to</small>
         <h3>{{ currentItem.addiction }}</h3>
         <input class="form-control edit-panel-item" data-ng-model="currentItem.name" placeholder="{{ currentItem.placeholder }}" data-ng-if="showPanel" focus="focus">
